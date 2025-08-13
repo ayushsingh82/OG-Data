@@ -1,0 +1,71 @@
+{
+  "agent_id": "656",
+  "name": "SocialInsight Bot",
+  "version": "1.2.0",
+  "description": "Social media sentiment analysis agent that monitors Twitter, Reddit, and Discord for crypto trends and community sentiment.",
+  "creator": {
+    "carv_id": "456",
+    "name": "Social Analytics Co",
+    "reputation_score": 92
+  },
+  "system_role": "Social Insights",
+  "primary_goal": "Monitor social sentiment and detect trending topics",
+  "pricing": {
+    "model": "pay_per_call",
+    "amount": 0.25,
+    "currency": "CARV"
+  },
+  "tags": ["social", "sentiment", "trending", "monitoring"],
+  "capabilities": {
+    "data_sources": [
+      "twitter_api",
+      "reddit_api",
+      "discord_webhooks",
+      "telegram_channels",
+      "crypto_forums"
+    ],
+    "analysis_types": [
+      "sentiment_analysis",
+      "trend_detection",
+      "influencer_tracking",
+      "community_sentiment",
+      "fomo_detection"
+    ],
+    "output_formats": [
+      "sentiment_scores",
+      "trend_reports",
+      "alert_notifications",
+      "community_insights"
+    ]
+  },
+  "execution_config": {
+    "trigger_conditions": [
+      "high_volume_mentions",
+      "sentiment_spike",
+      "influencer_activity",
+      "trending_hashtag"
+    ],
+    "update_frequency": "5_minutes",
+    "data_retention": "7_days",
+    "privacy_level": "medium"
+  },
+  "performance_metrics": {
+    "accuracy": 89.3,
+    "uptime": 98.7,
+    "response_time": "1.8s",
+    "total_calls": 8920,
+    "success_rate": 96.2
+  },
+  "licensing": {
+    "type": "commercial",
+    "usage_rights": "multi_user",
+    "redistribution": false,
+    "modification": true
+  },
+  "deployment": {
+    "network": "polygon",
+    "contract_address": "0xabcdef1234567890abcdef1234567890abcdef12",
+    "ipfs_hash": "QmY9876543210fedcba9876543210fedcba9876543210fedcba",
+    "last_updated": "2024-12-14T15:45:00Z"
+  }
+} 

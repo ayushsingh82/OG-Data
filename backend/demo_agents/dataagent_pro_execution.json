@@ -1,0 +1,108 @@
+{
+  "execution_id": "exec_543_20241215_103045",
+  "agent_id": "543",
+  "timestamp": "2024-12-15T10:30:45Z",
+  "request": {
+    "user_carv_id": "123",
+    "request_type": "whale_movement_analysis",
+    "parameters": {
+      "wallet_address": "0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6",
+      "timeframe": "24h",
+      "threshold_amount": "1000000",
+      "include_dex_activity": true
+    },
+    "payment": {
+      "amount": 0.15,
+      "currency": "CARV",
+      "transaction_hash": "0xabc123def456789abc123def456789abc123def456789abc123def456789abc1"
+    }
+  },
+  "execution_flow": {
+    "step_1": {
+      "action": "data_collection",
+      "status": "completed",
+      "duration": "1.2s",
+      "data_sources": [
+        "ethereum_blockchain",
+        "uniswap_v3",
+        "sushiswap"
+      ],
+      "records_processed": 15420
+    },
+    "step_2": {
+      "action": "whale_analysis",
+      "status": "completed",
+      "duration": "0.8s",
+      "large_transactions": 23,
+      "total_volume": "45000000"
+    },
+    "step_3": {
+      "action": "pattern_detection",
+      "status": "completed",
+      "duration": "0.3s",
+      "patterns_found": [
+        "accumulation_phase",
+        "distribution_activity"
+      ]
+    }
+  },
+  "results": {
+    "analysis_summary": {
+      "wallet_activity": "high",
+      "movement_type": "accumulation",
+      "risk_level": "medium",
+      "confidence_score": 87.5
+    },
+    "detailed_findings": [
+      {
+        "transaction_hash": "0xdef789abc123def789abc123def789abc123def789abc123def789abc123def7",
+        "amount": "2500000",
+        "token": "USDC",
+        "dex": "Uniswap V3",
+        "timestamp": "2024-12-15T09:45:12Z",
+        "significance": "high"
+      },
+      {
+        "transaction_hash": "0x123abc456def123abc456def123abc456def123abc456def123abc456def123a",
+        "amount": "1800000",
+        "token": "ETH",
+        "dex": "SushiSwap",
+        "timestamp": "2024-12-15T08:30:45Z",
+        "significance": "medium"
+      }
+    ],
+    "alerts": [
+      {
+        "type": "whale_movement",
+        "severity": "medium",
+        "message": "Large accumulation detected - 4.3M USDC equivalent moved in last 24h",
+        "recommendation": "Monitor for potential price impact"
+      }
+    ],
+    "market_impact_prediction": {
+      "short_term": "bullish",
+      "medium_term": "neutral",
+      "confidence": 78.2
+    }
+  },
+  "performance_metrics": {
+    "total_execution_time": "2.3s",
+    "data_processing_time": "1.2s",
+    "analysis_time": "1.1s",
+    "memory_usage": "45MB",
+    "cpu_usage": "23%"
+  },
+  "verification": {
+    "zk_proof_generated": true,
+    "proof_hash": "0xzk1234567890abcdef1234567890abcdef1234567890abcdef1234567890abc",
+    "tee_verification": "passed",
+    "data_integrity": "verified"
+  },
+  "billing": {
+    "base_cost": 0.15,
+    "data_processing_fee": 0.02,
+    "total_charged": 0.17,
+    "currency": "CARV",
+    "payment_status": "completed"
+  }
+} 

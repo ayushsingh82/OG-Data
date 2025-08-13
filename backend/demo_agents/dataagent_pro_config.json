@@ -1,0 +1,70 @@
+{
+  "agent_id": "543",
+  "name": "DataAgent Pro",
+  "version": "1.0.0",
+  "description": "Advanced data analysis agent specializing in on-chain analytics and DeFi insights. Provides real-time market analysis and trading signals.",
+  "creator": {
+    "carv_id": "789",
+    "name": "AgentForge Labs",
+    "reputation_score": 95
+  },
+  "system_role": "Data Analysis",
+  "primary_goal": "Alert whale moves, detect pump-and-dump tokens",
+  "pricing": {
+    "model": "pay_per_call",
+    "amount": 0.15,
+    "currency": "CARV"
+  },
+  "tags": ["on-chain", "DeFi", "trading", "analytics"],
+  "capabilities": {
+    "data_sources": [
+      "ethereum_blockchain",
+      "defi_protocols",
+      "dex_exchanges",
+      "whale_wallets"
+    ],
+    "analysis_types": [
+      "whale_movement_detection",
+      "pump_dump_analysis",
+      "market_sentiment",
+      "volume_analysis",
+      "price_correlation"
+    ],
+    "output_formats": [
+      "real_time_alerts",
+      "daily_reports",
+      "risk_assessments",
+      "trading_signals"
+    ]
+  },
+  "execution_config": {
+    "trigger_conditions": [
+      "large_transaction_detected",
+      "price_spike_alert",
+      "volume_surge",
+      "whale_wallet_activity"
+    ],
+    "update_frequency": "real_time",
+    "data_retention": "30_days",
+    "privacy_level": "high"
+  },
+  "performance_metrics": {
+    "accuracy": 87.5,
+    "uptime": 99.2,
+    "response_time": "2.3s",
+    "total_calls": 15420,
+    "success_rate": 94.8
+  },
+  "licensing": {
+    "type": "commercial",
+    "usage_rights": "single_user",
+    "redistribution": false,
+    "modification": false
+  },
+  "deployment": {
+    "network": "ethereum_mainnet",
+    "contract_address": "0x1234567890abcdef1234567890abcdef12345678",
+    "ipfs_hash": "QmX1234567890abcdef1234567890abcdef1234567890abcdef",
+    "last_updated": "2024-12-15T10:30:00Z"
+  }
+} 
