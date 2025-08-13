@@ -1,0 +1,33 @@
+# Exclude contract directory from build
+contract/
+contracts/
+hardhat.config.ts
+hardhat.config.js
+
+# Exclude backend files
+backend/
+*.py
+requirements.txt
+
+# Exclude development files
+.env.local
+.env.example
+.env
+
+# Exclude git files
+.git/
+.gitignore
+
+# Exclude node modules (will be installed during build)
+node_modules/
+
+# Exclude build artifacts
+.next/
+out/
+dist/
+
+# Exclude test files
+**/*.test.ts
+**/*.test.js
+**/*.spec.ts
+**/*.spec.js
