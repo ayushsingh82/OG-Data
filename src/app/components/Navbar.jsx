@@ -18,24 +18,30 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-[#824CFF] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">A</span>
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">🔬</span>
               </div>
-              <span className="text-white font-bold text-xl">AgentForge</span>
+              <span className="text-white font-bold text-xl">OG Research</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <Link href="/List" className="text-white hover:text-[#824CFF] transition-colors duration-200">
-                List 
-              </Link>
-              <Link href="/marketplace" className="text-white hover:text-[#824CFF] transition-colors duration-200">
-                Marketplace 
-              </Link>
-              <Link href="/dashboard" className="text-white hover:text-[#824CFF] transition-colors duration-200">
+              <Link href="/dashboard" className="text-white hover:text-blue-400 transition-colors duration-200">
                 Dashboard 
+              </Link>
+              <Link href="/marketplace" className="text-white hover:text-blue-400 transition-colors duration-200">
+                Data Marketplace 
+              </Link>
+              <Link href="/agents" className="text-white hover:text-blue-400 transition-colors duration-200">
+                AI Agents 
+              </Link>
+              <Link href="/workspaces" className="text-white hover:text-blue-400 transition-colors duration-200">
+                Workspaces 
+              </Link>
+              <Link href="/grants" className="text-white hover:text-blue-400 transition-colors duration-200">
+                Grants 
               </Link>
             </div>
           </div>
@@ -49,7 +55,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="text-white hover:text-[#824CFF] focus:outline-none focus:text-[#824CFF]"
+              className="text-white hover:text-blue-400 focus:outline-none focus:text-blue-400"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isMenuOpen ? (
@@ -67,25 +73,39 @@ const Navbar = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/95 border-t border-gray-800">
               <Link 
-                href="/List" 
-                className="text-white hover:text-[#824CFF] block px-3 py-2 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                List
-              </Link>
-              <Link 
-                href="/marketplace" 
-                className="text-white hover:text-[#824CFF] block px-3 py-2 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Marketplace
-              </Link>
-              <Link 
                 href="/dashboard" 
-                className="text-white hover:text-[#824CFF] block px-3 py-2 transition-colors duration-200"
+                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Dashboard
+              </Link>
+              <Link 
+                href="/marketplace" 
+                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Data Marketplace
+              </Link>
+              <Link 
+                href="/agents" 
+                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                AI Agents
+              </Link>
+              <Link 
+                href="/workspaces" 
+                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Workspaces
+              </Link>
+              <Link 
+                href="/grants" 
+                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Grants
               </Link>
               <div className="pt-4">
                 <ConnectButton />
