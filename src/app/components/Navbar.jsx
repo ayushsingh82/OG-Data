@@ -34,15 +34,7 @@ const Navbar = () => {
               <Link href="/marketplace" className="text-white hover:text-blue-400 transition-colors duration-200">
                 Data Marketplace 
               </Link>
-              <Link href="/agents" className="text-white hover:text-blue-400 transition-colors duration-200">
-                AI Agents 
-              </Link>
-              <Link href="/workspaces" className="text-white hover:text-blue-400 transition-colors duration-200">
-                Workspaces 
-              </Link>
-              <Link href="/grants" className="text-white hover:text-blue-400 transition-colors duration-200">
-                Grants 
-              </Link>
+             
             </div>
           </div>
 
@@ -86,27 +78,8 @@ const Navbar = () => {
               >
                 Data Marketplace
               </Link>
-              <Link 
-                href="/agents" 
-                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                AI Agents
-              </Link>
-              <Link 
-                href="/workspaces" 
-                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Workspaces
-              </Link>
-              <Link 
-                href="/grants" 
-                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Grants
-              </Link>
+              
+            
               <div className="pt-4">
                 <ConnectButton />
               </div>
