@@ -1,5 +1,10 @@
 # OG Research
 
+Main steps - 
+step1 -  integrate AI inference services from the 0G Compute Network
+step2 - storgae on og netowork 
+step3 - fine tune ai model and sell on our marketplace
+
 **Decentralized Research Tools with Collaborative AI Building**
 
 OG Research is a comprehensive platform for conducting decentralized research using AI agents, collaborative workspaces, and verified datasets. Built on the 0G network, it provides researchers with tools to accelerate scientific discovery through blockchain-powered collaboration and AI assistance.
