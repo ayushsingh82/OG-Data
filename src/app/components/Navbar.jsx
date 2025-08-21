@@ -19,9 +19,9 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">🔬</span>
+                <span className="text-white font-bold text-lg">🤖</span>
               </div>
-              <span className="text-white font-bold text-xl">OG Research</span>
+              <span className="text-white font-bold text-xl">OG-Data</span>
             </Link>
           </div>
 
@@ -32,7 +32,7 @@ const Navbar = () => {
                 Dashboard 
               </Link>
               <Link href="/marketplace" className="text-white hover:text-blue-400 transition-colors duration-200">
-                Data Marketplace 
+                AI Agents 
               </Link>
              
             </div>
@@ -76,10 +76,22 @@ const Navbar = () => {
                 className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Data Marketplace
+                AI Agents
               </Link>
-              
-            
+              <Link 
+                href="/storage" 
+                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Data Storage
+              </Link>
+              <Link 
+                href="/inference" 
+                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                AI Inference
+              </Link>
               <div className="pt-4">
                 <ConnectButton />
               </div>

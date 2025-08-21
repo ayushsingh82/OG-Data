@@ -4,55 +4,10 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-interface ResearchDataset {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  price: string;
-  size: string;
-  records: string;
-  quality: string;
-  provider: string;
-  tags: string[];
-  verified: boolean;
-  downloads: number;
-  rating: number;
-}
-
-interface AIAgent {
-  id: number;
-  name: string;
-  category: string;
-  description: string;
-  price: string;
-  calls: string;
-  accuracy: string;
-  provider: string;
-  tags: string[];
-  verified: boolean;
-  users: number;
-  rating: number;
-}
-
-interface ResearchTool {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  price: string;
-  type: string;
-  provider: string;
-  tags: string[];
-  verified: boolean;
-  users: number;
-  rating: number;
-}
-
-type MarketplaceItem = ResearchDataset | AIAgent | ResearchTool;
-
 export default function Marketplace() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
 
   const categories = [
     { id: 'all', name: 'All', icon: '🔬' },
@@ -69,7 +24,7 @@ export default function Marketplace() {
       title: 'Global Climate Data 2020-2024',
       category: 'Climate Science',
       description: 'Comprehensive climate dataset including temperature, precipitation, humidity, and atmospheric pressure from 150+ weather stations worldwide.',
-      price: '2,500 OG',
+      price: '18 OG',
       size: '15.2 GB',
       records: '2.3M',
       quality: '98.5%',
@@ -84,7 +39,7 @@ export default function Marketplace() {
       title: 'Human Genome Variants Database',
       category: 'Biotechnology',
       description: 'Annotated human genome variants with clinical significance, population frequencies, and disease associations.',
-      price: '5,000 OG',
+      price: '25 OG',
       size: '8.7 GB',
       records: '890K',
       quality: '99.2%',
@@ -99,7 +54,7 @@ export default function Marketplace() {
       title: 'Quantum Computing Benchmark Results',
       category: 'Physics',
       description: 'Performance benchmarks for quantum algorithms across different quantum computing platforms and error correction methods.',
-      price: '1,800 OG',
+      price: '15 OG',
       size: '3.4 GB',
       records: '156K',
       quality: '97.8%',
@@ -117,7 +72,7 @@ export default function Marketplace() {
       name: 'DataAnalyzer Pro',
       category: 'Data Analysis',
       description: 'Advanced statistical analysis agent with machine learning capabilities for research data processing and visualization.',
-      price: '500 OG',
+      price: '20 OG',
       calls: '0.05 OG per call',
       accuracy: '94.2%',
       provider: 'Data Science Lab',
@@ -131,7 +86,7 @@ export default function Marketplace() {
       name: 'LiteratureReview Bot',
       category: 'Research Assistant',
       description: 'AI-powered literature review agent that summarizes research papers, identifies key findings, and suggests related works.',
-      price: '300 OG',
+      price: '18 OG',
       calls: '0.03 OG per call',
       accuracy: '91.5%',
       provider: 'Academic AI Lab',
@@ -145,7 +100,7 @@ export default function Marketplace() {
       name: 'CollaborationFinder',
       category: 'Networking',
       description: 'Intelligent agent that finds potential research collaborators based on expertise, interests, and project requirements.',
-      price: '200 OG',
+      price: '22 OG',
       calls: '0.02 OG per call',
       accuracy: '89.7%',
       provider: 'Research Network Lab',
@@ -162,7 +117,7 @@ export default function Marketplace() {
       title: 'Research Workflow Manager',
       category: 'Productivity',
       description: 'Comprehensive tool for managing research projects, timelines, team collaboration, and progress tracking.',
-      price: '800 OG',
+      price: '30 OG',
       type: 'Software License',
       provider: 'Research Tools Inc.',
       tags: ['workflow', 'management', 'collaboration', 'tracking', 'productivity'],
@@ -175,7 +130,7 @@ export default function Marketplace() {
       title: 'Data Visualization Suite',
       category: 'Visualization',
       description: 'Advanced data visualization toolkit with interactive charts, graphs, and 3D modeling capabilities.',
-      price: '600 OG',
+      price: '28 OG',
       type: 'Software License',
       provider: 'Visual Analytics Lab',
       tags: ['visualization', 'charts', 'graphs', '3D', 'interactive'],
@@ -185,7 +140,7 @@ export default function Marketplace() {
     },
   ];
 
-  const renderItems = (): MarketplaceItem[] => {
+  const renderItems = () => {
     switch (activeCategory) {
       case 'datasets':
         return researchDatasets;
@@ -198,10 +153,18 @@ export default function Marketplace() {
     }
   };
 
-  // Type guards
-  const isDataset = (item: MarketplaceItem): item is ResearchDataset => 'size' in item;
-  const isAgent = (item: MarketplaceItem): item is AIAgent => 'calls' in item;
-  const isTool = (item: MarketplaceItem): item is ResearchTool => 'type' in item;
+  const handlePurchase = (item: any) => {
+    setSelectedItem(item);
+    setShowPurchaseModal(true);
+  };
+
+  const confirmPurchase = () => {
+    // Here you would integrate with your payment system
+    console.log('Purchasing:', selectedItem);
+    alert(`Purchase successful! You have bought ${selectedItem.title || selectedItem.name} for ${selectedItem.price}`);
+    setShowPurchaseModal(false);
+    setSelectedItem(null);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white">
@@ -212,21 +175,21 @@ export default function Marketplace() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <div className="inline-flex items-center px-4 py-2 bg-blue-600/20 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium mb-6">
-              🔬 Research Data Marketplace
+              🤖 AI Agent Marketplace
             </div>
             <h1 className="text-4xl sm:text-6xl font-bold mb-6">
-              Research <span className="text-blue-500">Data & Tools</span> Marketplace
+              Verifiable <span className="text-blue-500">AI Agents</span> Marketplace
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-              Discover verified datasets, AI agents, and research tools. Buy, sell, and trade with OG tokens 
-              to accelerate your research and scientific discoveries.
+              Discover, purchase, and deploy AI agents with Proof of Execution (PoE) verification. 
+              All agents priced in OG tokens for transparent trading.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
-                List Your Research
+                Browse AI Agents
               </button>
               <button className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
-                Browse Categories
+                Coming Soon: List Your Agent
               </button>
             </div>
           </div>
@@ -260,10 +223,10 @@ export default function Marketplace() {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-3xl font-bold">
-              {activeCategory === 'all' ? 'All Research Items' : 
+              {activeCategory === 'all' ? 'All AI Agents & Tools' : 
                activeCategory === 'datasets' ? 'Research Datasets' :
-               activeCategory === 'agents' ? 'AI Research Agents' :
-               activeCategory === 'tools' ? 'Research Tools' : 'Research Items'}
+               activeCategory === 'agents' ? 'AI Agents' :
+               activeCategory === 'tools' ? 'Research Tools' : 'AI Items'}
             </h2>
             <div className="flex items-center gap-4">
               <select className="bg-black/50 border border-gray-800 rounded-lg px-4 py-2 text-white">
@@ -294,35 +257,35 @@ export default function Marketplace() {
                   <div className="text-right">
                     <div className="text-xl font-bold text-blue-400">{item.price}</div>
                     <div className="text-sm text-gray-400">
-                      {isAgent(item) ? item.calls : isTool(item) ? item.type : 'One-time purchase'}
+                      {(item as any).calls || (item as any).type || 'One-time purchase'}
                     </div>
                   </div>
                 </div>
 
                 {/* Content */}
                 <h3 className="text-xl font-bold mb-3">
-                  {isDataset(item) ? item.title : isAgent(item) ? item.name : item.title}
+                  {(item as any).title || (item as any).name}
                 </h3>
                 <p className="text-gray-300 mb-4 text-sm line-clamp-3">{item.description}</p>
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                  {isDataset(item) && (
+                  {(item as any).size && (
                     <>
                       <div className="text-gray-400">
-                        <span className="text-blue-400">Size:</span> {item.size}
+                        <span className="text-blue-400">Size:</span> {(item as any).size}
                       </div>
                       <div className="text-gray-400">
-                        <span className="text-blue-400">Records:</span> {item.records}
+                        <span className="text-blue-400">Records:</span> {(item as any).records}
                       </div>
                       <div className="text-gray-400">
-                        <span className="text-blue-400">Quality:</span> {item.quality}
+                        <span className="text-blue-400">Quality:</span> {(item as any).quality}
                       </div>
                     </>
                   )}
-                  {isAgent(item) && (
+                  {(item as any).accuracy && (
                     <div className="text-gray-400">
-                      <span className="text-blue-400">Accuracy:</span> {item.accuracy}
+                      <span className="text-blue-400">Accuracy:</span> {(item as any).accuracy}
                     </div>
                   )}
                 </div>
@@ -350,11 +313,14 @@ export default function Marketplace() {
                   <div className="flex items-center gap-4 text-sm text-gray-400">
                     <span>⭐ {item.rating}</span>
                     <span>
-                      {isDataset(item) ? `📥 ${item.downloads}` : `👥 ${item.users}`}
+                      {(item as any).downloads ? `📥 ${(item as any).downloads}` : `👥 ${(item as any).users}`}
                     </span>
                   </div>
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200">
-                    {isAgent(item) ? 'Get Access' : 'Purchase'}
+                  <button 
+                    onClick={() => handlePurchase(item)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+                  >
+                    Purchase
                   </button>
                 </div>
               </div>
@@ -363,6 +329,75 @@ export default function Marketplace() {
         </div>
       </section>
 
+      {/* Purchase Modal */}
+      {showPurchaseModal && selectedItem && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-900 border border-gray-700 rounded-xl p-6 max-w-md w-full">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold">Confirm Purchase</h3>
+              <button 
+                onClick={() => setShowPurchaseModal(false)}
+                className="text-gray-400 hover:text-white"
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div className="mb-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                  <span className="text-xl">
+                    {selectedItem.category === 'Data Analysis' || selectedItem.category === 'Research Assistant' || selectedItem.category === 'Networking' ? '🤖' :
+                     selectedItem.category === 'Climate Science' ? '🌍' :
+                     selectedItem.category === 'Biotechnology' ? '🧬' :
+                     selectedItem.category === 'Physics' ? '🔬' :
+                     selectedItem.category === 'Productivity' ? '⚡' :
+                     selectedItem.category === 'Visualization' ? '📊' : '🔬'}
+                  </span>
+                </div>
+                <div>
+                  <h4 className="font-semibold">{selectedItem.title || selectedItem.name}</h4>
+                  <p className="text-sm text-gray-400">{selectedItem.category}</p>
+                </div>
+              </div>
+              
+              <div className="bg-gray-800 rounded-lg p-4 mb-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-300">Price:</span>
+                  <span className="text-2xl font-bold text-blue-400">{selectedItem.price}</span>
+                </div>
+                <div className="text-sm text-gray-400 mt-1">
+                  {selectedItem.calls || selectedItem.type || 'One-time purchase'}
+                </div>
+              </div>
+              
+              <div className="text-sm text-gray-300">
+                <p>• Verified provider: {selectedItem.provider}</p>
+                <p>• Quality rating: ⭐ {selectedItem.rating}</p>
+                {selectedItem.verified && (
+                  <p>• ✓ Verified and audited</p>
+                )}
+              </div>
+            </div>
+            
+            <div className="flex gap-3">
+              <button 
+                onClick={() => setShowPurchaseModal(false)}
+                className="flex-1 px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:border-gray-500 transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={confirmPurchase}
+                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Confirm Purchase
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Stats Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
         <div className="max-w-7xl mx-auto">
@@ -370,20 +405,20 @@ export default function Marketplace() {
             <h2 className="text-3xl font-bold mb-4">
               Marketplace <span className="text-blue-500">Statistics</span>
             </h2>
-            <p className="text-xl text-gray-300">Join thousands of researchers using our marketplace</p>
+            <p className="text-xl text-gray-300">Join thousands of users trading AI agents and data</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-500 mb-2">15,000+</div>
-              <p className="text-gray-300">Datasets Available</p>
+              <div className="text-4xl font-bold text-blue-500 mb-2">500+</div>
+              <p className="text-gray-300">Active Users</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-green-500 mb-2">2,500+</div>
+              <div className="text-4xl font-bold text-green-500 mb-2">1,200+</div>
               <p className="text-gray-300">AI Agents</p>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-purple-500 mb-2">8,000+</div>
-              <p className="text-gray-300">Active Researchers</p>
+              <p className="text-gray-300">Transactions</p>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-orange-500 mb-2">$1.2M+</div>

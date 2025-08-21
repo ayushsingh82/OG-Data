@@ -10,13 +10,13 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">🔬</span>
+                <span className="text-white font-bold text-lg">🤖</span>
               </div>
-              <span className="text-white font-bold text-xl">OG Research</span>
+              <span className="text-white font-bold text-xl">OG-Data</span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
-              Decentralized research tools with collaborative AI building on the 0G network. 
-              Create, collaborate, and discover with AI agents for scientific advancement.
+              Verifiable AI data marketplace powered by 0G Network. Buy, sell, and deploy AI agents 
+              with massive data storage and AI inference capabilities.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
@@ -44,22 +44,22 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Research Tools</h3>
+            <h3 className="text-white font-semibold mb-4">AI Agents</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/agents" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                  AI Agents
-                </Link>
-              </li>
-              <li>
                 <Link href="/marketplace" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                  Data Marketplace
+                  Browse Agents
                 </Link>
               </li>
               <li>
-                <Link href="/workspaces" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                  Workspaces
+                <Link href="/inference" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+                  AI Inference
                 </Link>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+                  Coming Soon: List Your Agent
+                </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
@@ -71,16 +71,16 @@ const Footer = () => {
 
           {/* Company */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Community</h3>
+            <h3 className="text-white font-semibold mb-4">Platform</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                  About
+                <Link href="/storage" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+                  Data Storage
                 </Link>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                  Research Grants
+                  Marketplace
                 </a>
               </li>
               <li>
@@ -100,7 +100,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-gray-400 text-sm">
-            © 2024 OG Research. Powered by 0G Labs. All rights reserved.
+            © 2024 OG-Data. Powered by 0G Network. All rights reserved.
           </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-blue-400 text-sm transition-colors duration-200">
