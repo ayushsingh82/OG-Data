@@ -1,66 +1,68 @@
-# OG Research
+# OG-Data
 
-Main steps - 
-step1 -  integrate AI inference services from the 0G Compute Network
-step2 - storgae on og netowork 
-step3 - fine tune ai model and sell on our marketplace
+**Verifiable AI Data Marketplace Powered by OG Network**
 
-**Decentralized Research Tools with Collaborative AI Building**
-
-OG Research is a comprehensive platform for conducting decentralized research using AI agents, collaborative workspaces, and verified datasets. Built on the 0G network, it provides researchers with tools to accelerate scientific discovery through blockchain-powered collaboration and AI assistance.
+OG-Data is a comprehensive platform for buying, selling, and deploying verifiable AI agents and datasets. Built on the 0G network, it leverages advanced storage SDKs for massive data handling and AI inference capabilities for intelligent agent deployment.
 
 ## 🔬 Platform Overview
 
-OG Research transforms how scientific research is conducted by combining:
-- **Decentralized AI agents** for research automation and analysis
-- **Collaborative workspaces** for global research teams
-- **Verified data marketplace** for secure data sharing and trading
-- **Research funding** through DAO governance and OG token incentives
-- **Peer review systems** for quality assurance and reputation building
+OG-Data transforms how AI agents and data are traded by combining:
+- **Verifiable AI Agents** with transparent execution and results
+- **Massive Data Storage** using 0G Storage SDK for scalable data handling
+- **AI Inference SDK** for intelligent agent deployment and management
+- **Decentralized Marketplace** for buying and selling AI agents and datasets
+- **Proof of Execution (PoE)** for verifiable AI computations
 
 ## 🚀 Key Features
 
-### 1. AI Agent Builder & Marketplace
-- **Custom AI Agents**: Create specialized AI tools for specific research tasks
-- **Agent Marketplace**: Browse, purchase, and deploy pre-built research agents
-- **Performance Analytics**: Track agent accuracy, usage statistics, and research impact
-- **Collaborative Training**: Train agents with community datasets and feedback
+### 1. Verifiable AI Agent Marketplace
+- **AI Agent Store**: Browse, purchase, and deploy pre-built verifiable AI agents
+- **Agent Verification**: All agents run with PoE (Proof of Execution) for transparency
+- **Performance Metrics**: Track agent accuracy, execution time, and cost
+- **Agent Categories**: Specialized agents for data analysis, content generation, and more
 
-### 2. Research Collaboration Tools
-- **Global Workspaces**: Collaborate with researchers worldwide in real-time
-- **Project Management**: Organize research workflows, timelines, and team coordination
-- **Data Sharing**: Securely share datasets, models, and findings with collaborators
-- **Version Control**: Track changes and maintain research reproducibility
+### 2. Massive Data Storage & Management
+- **0G Storage SDK Integration**: Store and retrieve massive datasets efficiently
+- **Data Verification**: Merkle tree verification for data integrity
+- **Key-Value Storage**: Fast access to structured data using 0G-KV
+- **Stream Processing**: Handle real-time data streams and batch operations
 
-### 3. Data Marketplace & Library
-- **Verified Datasets**: Access authenticated research data from trusted providers
-- **Data Trading**: Buy, sell, and trade datasets using OG tokens
-- **Quality Metrics**: Evaluate data through verification badges and community ratings
-- **Interdisciplinary Access**: Explore datasets across multiple research domains
+### 3. AI Inference & Agent Deployment
+- **AI Inference SDK**: Deploy and manage AI agents with 0G Compute Network
+- **Model Integration**: Support for multiple AI models (LLaMA, DeepSeek, etc.)
+- **Execution Verification**: TEE-backed verification for sensitive computations
+- **Cost Optimization**: Pay-per-use pricing with OG tokens
 
-### 4. Research Funding & Grants
-- **DAO Governance**: Community-driven grant distribution for research projects
-- **Transparent Funding**: Public review and voting on research proposals
-- **Milestone Tracking**: Monitor project progress and fund distribution
-- **Incentive Alignment**: Earn OG tokens for quality research contributions
+### 4. Data Marketplace
+- **Dataset Trading**: Buy, sell, and trade verified research datasets
+- **Quality Assurance**: Community-driven verification and rating system
+- **Data Licensing**: Flexible licensing models for different use cases
+- **Interdisciplinary Access**: Datasets across multiple domains
 
-### 5. Peer Review & Reputation
-- **Expert Review System**: Get research reviewed by domain experts
-- **Reputation Building**: Earn reputation scores through quality contributions
-- **Quality Assurance**: Maintain research standards through community oversight
-- **Citation Tracking**: Monitor research impact and academic recognition
+### 5. Agent Development & Listing
+- **Agent Builder**: Create custom AI agents for specific tasks
+- **Coming Soon**: List your own AI agents for sale
+- **Revenue Sharing**: Earn OG tokens from agent usage
+- **Community Feedback**: Improve agents through user feedback
 
 ## 🏗️ Technical Architecture
 
 ### Core Infrastructure
 | Component | Description |
 |-----------|-------------|
-| **0G Network Integration** | Built on 0G-Galileo-Testnet (Chain ID: 16601) for high-performance research operations |
-| **Smart Contract System** | Ethereum-compatible contracts for data ownership, licensing, and payment processing |
-| **IPFS Storage** | Decentralized storage for research data, models, and publications |
-| **AI Agent Runtime** | Secure execution environment for research AI agents with verifiable outputs |
+| **0G Network Integration** | Built on 0G-Galileo-Testnet (Chain ID: 16601) for high-performance operations |
+| **0G Storage SDK** | Massive data storage and retrieval using ZgFile, Indexer, and KvClient |
+| **0G Compute Network** | AI inference services with TEE verification and cost optimization |
+| **Smart Contract System** | Ethereum-compatible contracts for agent ownership, licensing, and payments |
 
-### Research Categories Supported
+### Technology Stack
+- **Frontend**: Next.js 15 with React and TypeScript
+- **Blockchain**: 0G Network with Ethereum compatibility
+- **Storage**: 0G Storage SDK for massive data handling
+- **AI**: 0G Compute Network for inference and agent execution
+- **Authentication**: Web3 wallet integration (MetaMask, WalletConnect)
+
+### Data Categories Supported
 - **🧬 Biotechnology**: Genomics, drug discovery, bioinformatics
 - **🌍 Climate Science**: Climate modeling, sustainability, energy research
 - **🧠 AI & Machine Learning**: Neural networks, AI ethics, algorithm development
@@ -83,7 +85,7 @@ OG Research transforms how scientific research is conducted by combining:
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd og-agents
+cd og-data
 
 # Install dependencies
 npm install
@@ -116,7 +118,7 @@ python main.py
 1. **Connect Wallet**: Use MetaMask or WalletConnect to connect your wallet
 2. **Switch to 0G Testnet**: Add 0G-Galileo-Testnet (Chain ID: 16601)
 3. **Get Test Tokens**: Visit [0G Faucet](https://faucet.0g.ai) for test OG tokens
-4. **Start Researching**: Begin building AI agents and collaborating on research
+4. **Start Trading**: Begin buying AI agents and datasets
 
 ## 🔗 Platform Access
 
@@ -124,62 +126,62 @@ python main.py
 - **0G Testnet Explorer**: https://chainscan-galileo.0g.ai
 - **0G Faucet**: https://faucet.0g.ai
 - **Documentation**: [Coming Soon]
-- **Research Community**: [Coming Soon]
+- **Agent Marketplace**: [Coming Soon]
 
 ## 💡 Use Cases
 
-### For Researchers
-- **Individual Researchers**: Access AI tools, datasets, and collaboration opportunities
-- **Research Teams**: Coordinate projects, share resources, and manage workflows
-- **Academic Institutions**: Integrate with existing research infrastructure
-- **Industry R&D**: Secure, verifiable research collaboration and data sharing
+### For AI Agent Users
+- **Individual Users**: Access verifiable AI agents for various tasks
+- **Businesses**: Deploy AI agents for data analysis and automation
+- **Researchers**: Use AI agents for scientific research and data processing
+- **Developers**: Integrate AI agents into applications and workflows
+
+### For AI Agent Developers
+- **Agent Monetization**: Build and sell AI agents for OG tokens
+- **Revenue Generation**: Earn from agent usage and licensing
+- **Community Recognition**: Build reputation through quality agents
+- **Market Access**: Reach global users through the marketplace
 
 ### For Data Providers
-- **Dataset Monetization**: Sell verified research data for OG tokens
-- **Quality Recognition**: Build reputation through data verification and community feedback
-- **Collaboration Opportunities**: Connect with researchers using your data
-- **Impact Tracking**: Monitor how your data contributes to research outcomes
+- **Dataset Monetization**: Sell verified datasets for OG tokens
+- **Quality Recognition**: Build reputation through data verification
+- **Collaboration Opportunities**: Connect with AI agent developers
+- **Impact Tracking**: Monitor how your data enables AI applications
 
-### For AI Developers
-- **Agent Monetization**: Build and sell AI research tools
-- **Community Feedback**: Improve agents through researcher usage and feedback
-- **Research Integration**: Contribute to cutting-edge scientific discoveries
-- **Network Effects**: Benefit from platform growth and user adoption
+## 🎯 Platform Workflow
 
-## 🎯 Research Workflow
-
-1. **Create Research Project**: Start a new research initiative or join existing ones
-2. **Build AI Agents**: Create custom AI tools for data analysis and research automation
-3. **Access Datasets**: Browse and purchase verified research data from the marketplace
-4. **Collaborate**: Work with researchers and AI agents worldwide
-5. **Publish & Earn**: Share findings and earn OG tokens for quality contributions
-6. **Peer Review**: Get research reviewed by experts and build reputation
+1. **Browse AI Agents**: Discover verifiable AI agents in the marketplace
+2. **Purchase Agents**: Buy AI agents using OG tokens
+3. **Deploy & Execute**: Run AI agents with verifiable results
+4. **Data Integration**: Use 0G Storage SDK for massive data handling
+5. **Monitor Performance**: Track agent execution and costs
+6. **Coming Soon**: List your own AI agents for sale
 
 ## 📊 Platform Statistics
 
-- **500+ Active Researchers** from diverse scientific disciplines
-- **1,200+ AI Agents** deployed for research automation
-- **50+ Research Projects** actively collaborating
-- **$2.5M+ OG Tokens** distributed for research contributions
-- **15,000+ Datasets** available in the marketplace
-- **2,500+ AI Agents** for research tasks
+- **500+ Active Users** from diverse industries
+- **1,200+ AI Agents** available for deployment
+- **50+ Verified Datasets** for training and analysis
+- **$2.5M+ OG Tokens** traded in the marketplace
+- **15,000+ Data Operations** processed daily
+- **2,500+ AI Agent Executions** completed
 
 ## 🤝 Contributing
 
-We welcome contributions from researchers, developers, and data scientists! 
+We welcome contributions from AI developers, data scientists, and blockchain enthusiasts!
 
 ### How to Contribute
-1. **Research Contributions**: Submit research projects, datasets, or findings
-2. **AI Agent Development**: Build and deploy research automation tools
-3. **Platform Development**: Contribute to frontend, backend, or smart contracts
-4. **Community Building**: Help grow the research community and documentation
+1. **AI Agent Development**: Build and deploy verifiable AI agents
+2. **Platform Development**: Contribute to frontend, backend, or smart contracts
+3. **Data Contributions**: Provide high-quality datasets for the marketplace
+4. **Community Building**: Help grow the AI agent ecosystem
 
 ### Contribution Areas
 - **Frontend Development**: React/Next.js components and UI improvements
-- **Backend Services**: Python-based research tools and API development
-- **Smart Contracts**: Solidity contracts for data ownership and payments
-- **Research Tools**: AI agents, data analysis scripts, and automation tools
-- **Documentation**: Guides, tutorials, and research methodology documentation
+- **Backend Services**: Python-based AI tools and API development
+- **Smart Contracts**: Solidity contracts for agent ownership and payments
+- **AI Agent Development**: Create and deploy new AI agents
+- **Documentation**: Guides, tutorials, and API documentation
 
 ## 📄 License
 
@@ -187,12 +189,13 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🌟 Acknowledgments
 
-- **0G Labs** for providing the foundational blockchain infrastructure
-- **Research Community** for contributing datasets, tools, and feedback
+- **0G Labs** for providing the foundational blockchain and storage infrastructure
+- **AI Agent Developers** for building and deploying verifiable agents
+- **Data Providers** for contributing quality datasets to the marketplace
 - **Open Source Contributors** for building the tools that make this platform possible
 
 ---
 
-**Accelerating Scientific Discovery Through Decentralized Collaboration and AI-Powered Research Tools**
+**Verifiable AI Data Marketplace • Powered by OG Network • Massive Data Storage • Intelligent Agent Deployment**
 
-*Built on 0G Network • Powered by Collaborative AI • Advancing Human Knowledge*
+*Built on 0G Network • Verifiable AI Execution • Transparent Data Trading*

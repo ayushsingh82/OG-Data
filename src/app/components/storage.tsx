@@ -77,3 +77,5 @@ export async function downloadStream(rootHash: string) {
 // - Always close files after upload/download.
 // - Handle errors for all network operations.
 // - Use ZgFile.fromFilePath for Node.js, Blob for browsers.
+
+
