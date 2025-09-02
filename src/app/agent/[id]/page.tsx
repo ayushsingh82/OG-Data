@@ -26,7 +26,7 @@ export default function AgentDetails() {
     verified: true,
     users: 2341,
     rating: 4.8,
-    reviews: 156,
+    reviewCount: 156,
     modelType: 'GPT-4 Fine-tuned',
     verificationType: 'TEE (Trusted Execution Environment)',
     responseTime: '500ms',

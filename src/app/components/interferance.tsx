@@ -6,10 +6,44 @@ import React, { useState } from 'react';
 import { BrowserProvider, ethers } from 'ethers';
 import { createZGComputeNetworkBroker } from '@0glabs/0g-serving-broker';
 
+interface Service {
+  provider: string;
+  serviceType: string;
+  url: string;
+  inputPrice: bigint;
+  outputPrice: bigint;
+  updatedAt: bigint;
+  model: string;
+  verifiability: string;
+  description?: string;
+}
+
+// Aligning the BrokerInstance with SDK’s actual signatures
+interface BrokerInstance {
+  ledger: {
+    getLedger: () => Promise<{
+      user: string;
+      availableBalance: bigint;
+      totalBalance: bigint;
+      inferenceSigner: [bigint, bigint];
+      additionalInfo: string;
+      inferenceProviders: string[];
+      fineTuningProviders: string[];
+    }>;
+    addLedger: (balance: number, gasPrice?: number) => Promise<void>;
+  };
+  inference: {
+    listService: () => Promise<Service[]>;
+    acknowledgeProviderSigner: (provider: string) => Promise<void>;
+    getServiceMetadata: (provider: string) => Promise<{ endpoint: string; model: string }>;
+    getRequestHeaders: (provider: string, question: string) => Promise<Record<string, string>>;
+  };
+}
+
 export default function InferenceClient() {
-  const [broker, setBroker] = useState<any>(null);
+  const [broker, setBroker] = useState<BrokerInstance | null>(null);
   const [balance, setBalance] = useState<string>('');
-  const [services, setServices] = useState<any[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [loading, setLoading] = useState(false);
@@ -22,20 +56,22 @@ export default function InferenceClient() {
     }
     const provider = new BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
-    const brokerInstance = await createZGComputeNetworkBroker(signer);
+
+    // Cast to your local BrokerInstance type
+    const brokerInstance = (await createZGComputeNetworkBroker(signer)) as unknown as BrokerInstance;
     setBroker(brokerInstance);
 
     // Check balance
     const account = await brokerInstance.ledger.getLedger();
-    setBalance(ethers.formatEther(account.balance));
+    setBalance(ethers.formatEther(account.availableBalance));
   };
 
   // Fund account
   const fund = async () => {
     if (!broker) return;
-    await broker.ledger.addLedger(ethers.parseEther('0.1'));
+    await broker.ledger.addLedger(0.1); // pass number instead of bigint
     const account = await broker.ledger.getLedger();
-    setBalance(ethers.formatEther(account.balance));
+    setBalance(ethers.formatEther(account.availableBalance));
   };
 
   // Discover services
@@ -46,7 +82,8 @@ export default function InferenceClient() {
   };
 
   // Ask a question to a service
-  const ask = async (service: any) => {
+  const ask = async (service: Service) => {
+    if (!broker) return;
     setLoading(true);
     try {
       // Acknowledge provider

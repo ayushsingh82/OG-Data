@@ -62,7 +62,7 @@ export async function uploadStream() {
   stream.push('Hello, 0G Storage!');
   stream.push(null);
   const file = await ZgFile.fromStream(stream, 'hello.txt');
-  const [tx, err] = await indexer.upload(file, RPC_URL, signer);
+  const [, err] = await indexer.upload(file, RPC_URL, signer);
   if (err === null) console.log('Stream uploaded!');
 }
 

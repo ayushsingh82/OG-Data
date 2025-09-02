@@ -3,10 +3,23 @@
 import React, { useState, useEffect } from 'react';
 import { useAccount, useBalance, useWriteContract } from 'wagmi';
 
+interface MarketplaceItem {
+  id: number;
+  title?: string;
+  name?: string;
+  category: string;
+  description: string;
+  price: string;
+  provider: string;
+  tags: string[];
+  verified: boolean;
+  rating: number;
+}
+
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  item: any;
+  item: MarketplaceItem | null;
   onSuccess: () => void;
 }
 
@@ -16,7 +29,7 @@ const OG_TOKEN_CONTRACT = '0x1234567890123456789012345678901234567890';
 export default function PaymentModal({ isOpen, onClose, item, onSuccess }: PaymentModalProps) {
   const { address, isConnected } = useAccount();
   const [paymentMethod, setPaymentMethod] = useState<'og' | 'usdc'>('og');
-  const [isProcessing, setIsProcessing] = useState(false);
+
   const [step, setStep] = useState<'confirm' | 'processing' | 'success' | 'error'>('confirm');
   const [error, setError] = useState<string>('');
 
@@ -33,7 +46,6 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
   useEffect(() => {
     if (isSuccess) {
       setStep('success');
-      setIsProcessing(false);
       setTimeout(() => {
         onSuccess();
         onClose();
@@ -42,7 +54,6 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
     if (isError && contractError) {
       setError(contractError.message);
       setStep('error');
-      setIsProcessing(false);
     }
   }, [isSuccess, isError, contractError, onSuccess, onClose]);
 
@@ -53,7 +64,6 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
       return;
     }
 
-    setIsProcessing(true);
     setStep('processing');
 
     try {
@@ -76,29 +86,28 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
           functionName: 'transfer',
           args: [
             '0x0000000000000000000000000000000000000000', // Marketplace contract address
-            BigInt(parseInt(item.price.replace(' OG', '')) * 10**18) // Convert to wei
+            BigInt(parseInt((item?.price || '0 OG').replace(' OG', '')) * 10 ** 18) // Convert to wei
           ]
         });
       } else {
         // Handle USDC payment (mock implementation)
         await new Promise(resolve => setTimeout(resolve, 3000));
         setStep('success');
-        setIsProcessing(false);
         setTimeout(() => {
           onSuccess();
           onClose();
         }, 2000);
       }
-    } catch (error: any) {
-      setError(error.message || 'Payment failed');
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Payment failed';
+      setError(errorMessage);
       setStep('error');
-      setIsProcessing(false);
     }
   };
 
-  const formatBalance = (balance: any) => {
+  const formatBalance = (balance: { formatted: string } | undefined) => {
     if (!balance) return '0';
-    return (Number(balance.formatted)).toFixed(2);
+    return Number(balance.formatted).toFixed(2);
   };
 
   const getPriceInUSD = (ogPrice: string) => {
@@ -108,6 +117,12 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
   };
 
   if (!isOpen) return null;
+
+  const isInsufficientBalance =
+    paymentMethod === 'og' &&
+    ogBalance &&
+    item &&
+    Number(ogBalance.formatted) < parseInt(item.price.replace(' OG', ''));
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -139,8 +154,8 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
                 <span className="text-xl">🤖</span>
               </div>
               <div>
-                <h4 className="font-semibold">{item.title || item.name}</h4>
-                <p className="text-sm text-gray-400">{item.category}</p>
+                <h4 className="font-semibold">{item?.title || item?.name}</h4>
+                <p className="text-sm text-gray-400">{item?.category}</p>
               </div>
             </div>
 
@@ -176,7 +191,7 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
                   <div className="flex-1">
                     <div className="font-medium">USDC</div>
                     <div className="text-sm text-gray-400">
-                      Equivalent: ${getPriceInUSD(item.price)}
+                      Equivalent: ${getPriceInUSD(item?.price || '0 OG')}
                     </div>
                   </div>
                 </label>
@@ -187,10 +202,10 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
             <div className="bg-gray-800 rounded-lg p-4 mb-6">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-gray-300">Price:</span>
-                <span className="text-2xl font-bold text-blue-400">{item.price}</span>
+                <span className="text-2xl font-bold text-blue-400">{item?.price}</span>
               </div>
               <div className="text-sm text-gray-400">
-                {paymentMethod === 'og' ? 'Paid in OG tokens' : `~$${getPriceInUSD(item.price)} USDC`}
+                {paymentMethod === 'og' ? 'Paid in OG tokens' : `~$${getPriceInUSD(item?.price || '0 OG')} USDC`}
               </div>
             </div>
 
@@ -204,11 +219,10 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
             )}
 
             {/* Insufficient Balance Warning */}
-            {isConnected && paymentMethod === 'og' && ogBalance && 
-             Number(ogBalance.formatted) < parseInt(item.price.replace(' OG', '')) && (
+            {isConnected && isInsufficientBalance && (
               <div className="bg-red-600/20 border border-red-500/30 rounded-lg p-3 mb-6">
                 <p className="text-red-400 text-sm">
-                  ⚠️ Insufficient OG token balance. You need {item.price} but have {formatBalance(ogBalance)} OG
+                  ⚠️ Insufficient OG token balance. You need {item?.price} but have {formatBalance(ogBalance)} OG
                 </p>
               </div>
             )}
@@ -223,7 +237,7 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
               </button>
               <button 
                 onClick={handlePayment}
-                disabled={!isConnected || isPending || (paymentMethod === 'og' && ogBalance && Number(ogBalance.formatted) < parseInt(item.price.replace(' OG', '')))}
+                disabled={!Boolean(isConnected) || isPending || isInsufficientBalance}
                 className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors"
               >
                 {isPending ? 'Processing...' : 'Confirm Payment'}
@@ -247,7 +261,7 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
             </div>
             <h4 className="text-xl font-bold text-green-400 mb-2">Payment Successful!</h4>
             <p className="text-gray-300 mb-4">
-              You have successfully purchased {item.title || item.name}
+              You have successfully purchased {item?.title || item?.name}
             </p>
             <div className="bg-gray-800 rounded-lg p-3 mb-4">
               <p className="text-sm text-gray-400">Transaction Hash:</p>

@@ -5,10 +5,70 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PaymentModal from '../components/PaymentModal';
 
+interface ResearchDataset {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  price: string;
+  size: string;
+  records: string;
+  quality: string;
+  provider: string;
+  tags: string[];
+  verified: boolean;
+  downloads: number;
+  rating: number;
+}
+
+interface AIAgent {
+  id: number;
+  name: string;
+  category: string;
+  description: string;
+  price: string;
+  calls: string;
+  accuracy: string;
+  provider: string;
+  tags: string[];
+  verified: boolean;
+  users: number;
+  rating: number;
+}
+
+interface ResearchTool {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  price: string;
+  type: string;
+  provider: string;
+  tags: string[];
+  verified: boolean;
+  users: number;
+  rating: number;
+}
+
+type MarketplaceItem = ResearchDataset | AIAgent | ResearchTool;
+
+// Type guards
+const isDataset = (item: MarketplaceItem): item is ResearchDataset => {
+  return 'size' in item;
+};
+
+const isAgent = (item: MarketplaceItem): item is AIAgent => {
+  return 'calls' in item;
+};
+
+const isTool = (item: MarketplaceItem): item is ResearchTool => {
+  return 'type' in item;
+};
+
 export default function Marketplace() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [selectedItem, setSelectedItem] = useState<MarketplaceItem | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [priceRange, setPriceRange] = useState({ min: 0, max: 100 });
   const [sortBy, setSortBy] = useState('relevance');
@@ -170,12 +230,13 @@ export default function Marketplace() {
 
     // Search filter
     if (searchQuery) {
-      items = items.filter(item => 
-        ((item as any).title || (item as any).name).toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.provider.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-      );
+      items = items.filter(item => {
+        const title = isDataset(item) || isTool(item) ? item.title : item.name;
+        return title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+               item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+               item.provider.toLowerCase().includes(searchQuery.toLowerCase()) ||
+               item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+      });
     }
 
     // Price filter
@@ -208,7 +269,11 @@ export default function Marketplace() {
         items.sort((a, b) => b.rating - a.rating);
         break;
       case 'downloads':
-        items.sort((a, b) => ((b as any).downloads || (b as any).users) - ((a as any).downloads || (a as any).users));
+        items.sort((a, b) => {
+          const aCount = isDataset(a) ? a.downloads : a.users;
+          const bCount = isDataset(b) ? b.downloads : b.users;
+          return bCount - aCount;
+        });
         break;
       default:
         // Keep original order for relevance
@@ -226,7 +291,7 @@ export default function Marketplace() {
     );
   };
 
-  const handlePurchase = (item: any) => {
+  const handlePurchase = (item: MarketplaceItem) => {
     setSelectedItem(item);
     setShowPurchaseModal(true);
   };
@@ -440,7 +505,7 @@ export default function Marketplace() {
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {filteredItems().map((item) => {
               // Create unique key based on item type and ID
-              const itemType = (item as any).size ? 'dataset' : (item as any).calls ? 'agent' : 'tool';
+              const itemType = isDataset(item) ? 'dataset' : isAgent(item) ? 'agent' : 'tool';
               const uniqueKey = `${itemType}-${item.id}`;
               
               return (
@@ -460,7 +525,7 @@ export default function Marketplace() {
                   <div className="text-right">
                     <div className="text-xl font-bold text-blue-400">{item.price}</div>
                     <div className="text-sm text-gray-400">
-                      {(item as any).calls || (item as any).type || 'One-time purchase'}
+                      {isAgent(item) ? item.calls : isTool(item) ? item.type : 'One-time purchase'}
                     </div>
                   </div>
                 </div>
@@ -471,29 +536,29 @@ export default function Marketplace() {
                     href={`/agent/${item.id}`}
                     className="hover:text-blue-400 transition-colors"
                   >
-                    {(item as any).title || (item as any).name}
+                    {isDataset(item) || isTool(item) ? item.title : item.name}
                   </a>
                 </h3>
                 <p className="text-gray-300 mb-4 text-sm line-clamp-3">{item.description}</p>
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                  {(item as any).size && (
+                  {isDataset(item) && (
                     <>
                       <div className="text-gray-400">
-                        <span className="text-blue-400">Size:</span> {(item as any).size}
+                        <span className="text-blue-400">Size:</span> {item.size}
                       </div>
                       <div className="text-gray-400">
-                        <span className="text-blue-400">Records:</span> {(item as any).records}
+                        <span className="text-blue-400">Records:</span> {item.records}
                       </div>
                       <div className="text-gray-400">
-                        <span className="text-blue-400">Quality:</span> {(item as any).quality}
+                        <span className="text-blue-400">Quality:</span> {item.quality}
                       </div>
                     </>
                   )}
-                  {(item as any).accuracy && (
+                  {isAgent(item) && (
                     <div className="text-gray-400">
-                      <span className="text-blue-400">Accuracy:</span> {(item as any).accuracy}
+                      <span className="text-blue-400">Accuracy:</span> {item.accuracy}
                     </div>
                   )}
                 </div>
@@ -521,7 +586,7 @@ export default function Marketplace() {
                   <div className="flex items-center gap-4 text-sm text-gray-400">
                     <span>⭐ {item.rating}</span>
                     <span>
-                      {(item as any).downloads ? `📥 ${(item as any).downloads}` : `👥 ${(item as any).users}`}
+                      {isDataset(item) ? `📥 ${item.downloads}` : `👥 ${item.users}`}
                     </span>
                   </div>
                   <button 
@@ -579,4 +644,4 @@ export default function Marketplace() {
       <Footer />
     </div>
   );
-} 
+}   
