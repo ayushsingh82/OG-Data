@@ -171,7 +171,7 @@ export default function Marketplace() {
     // Search filter
     if (searchQuery) {
       items = items.filter(item => 
-        (item.title || item.name).toLowerCase().includes(searchQuery.toLowerCase()) ||
+        ((item as any).title || (item as any).name).toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.provider.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -208,7 +208,7 @@ export default function Marketplace() {
         items.sort((a, b) => b.rating - a.rating);
         break;
       case 'downloads':
-        items.sort((a, b) => (b.downloads || b.users) - (a.downloads || a.users));
+        items.sort((a, b) => ((b as any).downloads || (b as any).users) - ((a as any).downloads || (a as any).users));
         break;
       default:
         // Keep original order for relevance
@@ -259,9 +259,6 @@ export default function Marketplace() {
               <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
                 Browse AI Agents
               </button>
-              <button className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
-                Coming Soon: List Your Agent
-              </button>
             </div>
           </div>
         </div>
@@ -302,8 +299,8 @@ export default function Marketplace() {
                 {category.name}
               </button>
             ))}
-          </div>
-
+              </div>
+              
           {/* Filter Toggle */}
           <div className="flex justify-center mb-6">
             <button
@@ -376,7 +373,7 @@ export default function Marketplace() {
                     <option value="rating">Rating</option>
                     <option value="downloads">Popularity</option>
                   </select>
-                </div>
+              </div>
               </div>
               
               {/* Tags Filter */}
@@ -404,7 +401,7 @@ export default function Marketplace() {
                       className="text-sm text-blue-400 hover:text-blue-300"
                     >
                       Clear all tags
-                    </button>
+                </button>
                   </div>
                 )}
               </div>
@@ -429,7 +426,7 @@ export default function Marketplace() {
                 {searchQuery && ` for "${searchQuery}"`}
                 {selectedTags.length > 0 && ` with tags: ${selectedTags.join(', ')}`}
               </p>
-            </div>
+                </div>
             <div className="flex items-center gap-4">
               <a
                 href="/list-agent"
@@ -437,12 +434,17 @@ export default function Marketplace() {
               >
                 + List Your Agent
               </a>
-            </div>
-          </div>
-
+                </div>
+              </div>
+              
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {filteredItems().map((item) => (
-              <div key={item.id} className="bg-black/50 border border-gray-800 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105">
+            {filteredItems().map((item) => {
+              // Create unique key based on item type and ID
+              const itemType = (item as any).size ? 'dataset' : (item as any).calls ? 'agent' : 'tool';
+              const uniqueKey = `${itemType}-${item.id}`;
+              
+              return (
+              <div key={uniqueKey} className="bg-black/50 border border-gray-800 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -530,7 +532,8 @@ export default function Marketplace() {
                   </button>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

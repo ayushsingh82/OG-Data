@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useAccount, useBalance, useContractWrite, usePrepareContractWrite } from 'wagmi';
+import { useAccount, useBalance, useWriteContract } from 'wagmi';
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -26,45 +26,25 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
     token: OG_TOKEN_CONTRACT,
   });
 
-  // Prepare contract write for OG token transfer
-  const { config: transferConfig } = usePrepareContractWrite({
-    address: OG_TOKEN_CONTRACT,
-    abi: [
-      {
-        name: 'transfer',
-        type: 'function',
-        stateMutability: 'nonpayable',
-        inputs: [
-          { name: 'to', type: 'address' },
-          { name: 'amount', type: 'uint256' }
-        ],
-        outputs: [{ name: '', type: 'bool' }]
-      }
-    ],
-    functionName: 'transfer',
-    args: [
-      '0x0000000000000000000000000000000000000000', // Marketplace contract address
-      BigInt(parseInt(item.price.replace(' OG', '')) * 10**18) // Convert to wei
-    ],
-    enabled: isConnected && paymentMethod === 'og'
-  });
+  // Contract write for OG token transfer
+  const { writeContract: transferOG, isPending, isSuccess, isError, error: contractError } = useWriteContract();
 
-  const { write: transferOG } = useContractWrite({
-    ...transferConfig,
-    onSuccess: () => {
+  // Handle contract write states
+  useEffect(() => {
+    if (isSuccess) {
       setStep('success');
       setIsProcessing(false);
       setTimeout(() => {
         onSuccess();
         onClose();
       }, 2000);
-    },
-    onError: (error) => {
-      setError(error.message);
+    }
+    if (isError && contractError) {
+      setError(contractError.message);
       setStep('error');
       setIsProcessing(false);
     }
-  });
+  }, [isSuccess, isError, contractError, onSuccess, onClose]);
 
   const handlePayment = async () => {
     if (!isConnected) {
@@ -79,11 +59,26 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
     try {
       if (paymentMethod === 'og') {
         // Execute OG token transfer
-        if (transferOG) {
-          transferOG();
-        } else {
-          throw new Error('Transfer function not available');
-        }
+        transferOG({
+          address: OG_TOKEN_CONTRACT,
+          abi: [
+            {
+              name: 'transfer',
+              type: 'function',
+              stateMutability: 'nonpayable',
+              inputs: [
+                { name: 'to', type: 'address' },
+                { name: 'amount', type: 'uint256' }
+              ],
+              outputs: [{ name: '', type: 'bool' }]
+            }
+          ],
+          functionName: 'transfer',
+          args: [
+            '0x0000000000000000000000000000000000000000', // Marketplace contract address
+            BigInt(parseInt(item.price.replace(' OG', '')) * 10**18) // Convert to wei
+          ]
+        });
       } else {
         // Handle USDC payment (mock implementation)
         await new Promise(resolve => setTimeout(resolve, 3000));
@@ -228,10 +223,10 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
               </button>
               <button 
                 onClick={handlePayment}
-                disabled={!isConnected || (paymentMethod === 'og' && ogBalance && Number(ogBalance.formatted) < parseInt(item.price.replace(' OG', '')))}
+                disabled={!isConnected || isPending || (paymentMethod === 'og' && ogBalance && Number(ogBalance.formatted) < parseInt(item.price.replace(' OG', '')))}
                 className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors"
               >
-                Confirm Payment
+                {isPending ? 'Processing...' : 'Confirm Payment'}
               </button>
             </div>
           </div>
