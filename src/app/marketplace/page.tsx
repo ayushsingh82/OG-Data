@@ -268,10 +268,27 @@ export default function Marketplace() {
         </div>
       </section>
 
-      {/* Categories */}
+      {/* Search and Filters */}
       <section className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-4">
+          {/* Search Bar */}
+          <div className="mb-8">
+            <div className="relative max-w-2xl mx-auto">
+              <input
+                type="text"
+                placeholder="Search agents, datasets, tools..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-6 py-4 bg-black/50 border border-gray-800 rounded-lg focus:border-blue-500 focus:outline-none text-white placeholder-gray-400"
+              />
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                🔍
+              </div>
+            </div>
+          </div>
+
+          {/* Categories */}
+          <div className="flex flex-wrap justify-center gap-4 mb-6">
             {categories.map((category) => (
               <button
                 key={category.id}
@@ -287,6 +304,113 @@ export default function Marketplace() {
               </button>
             ))}
           </div>
+
+          {/* Filter Toggle */}
+          <div className="flex justify-center mb-6">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center gap-2 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg hover:border-blue-500 transition-colors"
+            >
+              <span>🔧</span>
+              Advanced Filters
+              <span className={`transform transition-transform ${showFilters ? 'rotate-180' : ''}`}>
+                ▼
+              </span>
+            </button>
+          </div>
+
+          {/* Advanced Filters */}
+          {showFilters && (
+            <div className="bg-black/50 border border-gray-800 rounded-xl p-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Price Range */}
+                <div>
+                  <label className="block text-sm font-medium mb-3">Price Range (OG)</label>
+                  <div className="space-y-2">
+                    <div className="flex gap-2">
+                      <input
+                        type="number"
+                        placeholder="Min"
+                        value={priceRange.min}
+                        onChange={(e) => setPriceRange(prev => ({ ...prev, min: parseInt(e.target.value) || 0 }))}
+                        className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white text-sm"
+                      />
+                      <input
+                        type="number"
+                        placeholder="Max"
+                        value={priceRange.max}
+                        onChange={(e) => setPriceRange(prev => ({ ...prev, max: parseInt(e.target.value) || 100 }))}
+                        className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white text-sm"
+                      />
+                    </div>
+                    <div className="text-xs text-gray-400">
+                      Range: {priceRange.min} - {priceRange.max} OG
+                    </div>
+                  </div>
+                </div>
+
+                {/* Verification Filter */}
+                <div>
+                  <label className="block text-sm font-medium mb-3">Verification</label>
+                  <select
+                    value={verificationFilter}
+                    onChange={(e) => setVerificationFilter(e.target.value)}
+                    className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white text-sm"
+                  >
+                    <option value="all">All Items</option>
+                    <option value="verified">Verified Only</option>
+                    <option value="unverified">Unverified Only</option>
+                  </select>
+                </div>
+
+                {/* Sort By */}
+                <div>
+                  <label className="block text-sm font-medium mb-3">Sort By</label>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white text-sm"
+                  >
+                    <option value="relevance">Relevance</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Rating</option>
+                    <option value="downloads">Popularity</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Tags Filter */}
+              <div className="mt-6">
+                <label className="block text-sm font-medium mb-3">Tags</label>
+                <div className="flex flex-wrap gap-2">
+                  {allTags.slice(0, 20).map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => toggleTag(tag)}
+                      className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                        selectedTags.includes(tag)
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                      }`}
+                    >
+                      #{tag}
+                    </button>
+                  ))}
+                </div>
+                {selectedTags.length > 0 && (
+                  <div className="mt-3">
+                    <button
+                      onClick={() => setSelectedTags([])}
+                      className="text-sm text-blue-400 hover:text-blue-300"
+                    >
+                      Clear all tags
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
