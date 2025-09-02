@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import PaymentModal from '../components/PaymentModal';
 
 export default function Marketplace() {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -231,9 +232,7 @@ export default function Marketplace() {
   };
 
   const confirmPurchase = () => {
-    // Here you would integrate with your payment system
-    console.log('Purchasing:', selectedItem);
-    alert(`Purchase successful! You have bought ${selectedItem.title || selectedItem.name} for ${selectedItem.price}`);
+    console.log('Purchase completed:', selectedItem);
     setShowPurchaseModal(false);
     setSelectedItem(null);
   };
@@ -379,7 +378,7 @@ export default function Marketplace() {
                   </select>
                 </div>
               </div>
-
+              
               {/* Tags Filter */}
               <div className="mt-6">
                 <label className="block text-sm font-medium mb-3">Tags</label>
@@ -504,8 +503,8 @@ export default function Marketplace() {
                   {item.verified && (
                     <span className="text-green-400 text-xs">✓ Verified</span>
                   )}
-                </div>
-
+              </div>
+              
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {item.tags.slice(0, 4).map((tag, index) => (
@@ -513,10 +512,10 @@ export default function Marketplace() {
                       {tag}
                     </span>
                   ))}
-                </div>
-
+              </div>
+              
                 {/* Footer */}
-                <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4 text-sm text-gray-400">
                     <span>⭐ {item.rating}</span>
                     <span>
@@ -549,7 +548,7 @@ export default function Marketplace() {
                 ✕
               </button>
             </div>
-            
+
             <div className="mb-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -585,8 +584,8 @@ export default function Marketplace() {
                   <p>• ✓ Verified and audited</p>
                 )}
               </div>
-            </div>
-            
+              </div>
+              
             <div className="flex gap-3">
               <button 
                 onClick={() => setShowPurchaseModal(false)}
@@ -599,8 +598,8 @@ export default function Marketplace() {
                 className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Confirm Purchase
-              </button>
-            </div>
+                </button>
+              </div>
           </div>
         </div>
       )}
