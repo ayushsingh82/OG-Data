@@ -418,25 +418,31 @@ export default function Marketplace() {
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold">
-              {activeCategory === 'all' ? 'All AI Agents & Tools' : 
-               activeCategory === 'datasets' ? 'Research Datasets' :
-               activeCategory === 'agents' ? 'AI Agents' :
-               activeCategory === 'tools' ? 'Research Tools' : 'AI Items'}
-            </h2>
+            <div>
+              <h2 className="text-3xl font-bold">
+                {activeCategory === 'all' ? 'All AI Agents & Tools' : 
+                 activeCategory === 'datasets' ? 'Research Datasets' :
+                 activeCategory === 'agents' ? 'AI Agents' :
+                 activeCategory === 'tools' ? 'Research Tools' : 'AI Items'}
+              </h2>
+              <p className="text-gray-400 mt-2">
+                {filteredItems().length} items found
+                {searchQuery && ` for "${searchQuery}"`}
+                {selectedTags.length > 0 && ` with tags: ${selectedTags.join(', ')}`}
+              </p>
+            </div>
             <div className="flex items-center gap-4">
-              <select className="bg-black/50 border border-gray-800 rounded-lg px-4 py-2 text-white">
-                <option>Sort by: Relevance</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
-                <option>Rating</option>
-                <option>Downloads</option>
-              </select>
+              <a
+                href="/list-agent"
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200"
+              >
+                + List Your Agent
+              </a>
             </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {renderItems().map((item) => (
+            {filteredItems().map((item) => (
               <div key={item.id} className="bg-black/50 border border-gray-800 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
@@ -460,7 +466,12 @@ export default function Marketplace() {
 
                 {/* Content */}
                 <h3 className="text-xl font-bold mb-3">
-                  {(item as any).title || (item as any).name}
+                  <a 
+                    href={`/agent/${item.id}`}
+                    className="hover:text-blue-400 transition-colors"
+                  >
+                    {(item as any).title || (item as any).name}
+                  </a>
                 </h3>
                 <p className="text-gray-300 mb-4 text-sm line-clamp-3">{item.description}</p>
 
