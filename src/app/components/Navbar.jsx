@@ -34,6 +34,9 @@ const Navbar = () => {
               <Link href="/marketplace" className="text-white hover:text-blue-400 transition-colors duration-200">
                 AI Agents 
               </Link>
+              <Link href="/list-agent" className="text-white hover:text-blue-400 transition-colors duration-200">
+                List Agent
+              </Link>
              
             </div>
           </div>
@@ -79,18 +82,11 @@ const Navbar = () => {
                 AI Agents
               </Link>
               <Link 
-                href="/storage" 
+                href="/list-agent" 
                 className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Data Storage
-              </Link>
-              <Link 
-                href="/inference" 
-                className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                AI Inference
+                List Agent
               </Link>
               <div className="pt-4">
                 <ConnectButton />

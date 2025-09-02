@@ -535,74 +535,13 @@ export default function Marketplace() {
         </div>
       </section>
 
-      {/* Purchase Modal */}
-      {showPurchaseModal && selectedItem && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-900 border border-gray-700 rounded-xl p-6 max-w-md w-full">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold">Confirm Purchase</h3>
-              <button 
-                onClick={() => setShowPurchaseModal(false)}
-                className="text-gray-400 hover:text-white"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="mb-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-xl">
-                    {selectedItem.category === 'Data Analysis' || selectedItem.category === 'Research Assistant' || selectedItem.category === 'Networking' ? '🤖' :
-                     selectedItem.category === 'Climate Science' ? '🌍' :
-                     selectedItem.category === 'Biotechnology' ? '🧬' :
-                     selectedItem.category === 'Physics' ? '🔬' :
-                     selectedItem.category === 'Productivity' ? '⚡' :
-                     selectedItem.category === 'Visualization' ? '📊' : '🔬'}
-                  </span>
-                </div>
-                <div>
-                  <h4 className="font-semibold">{selectedItem.title || selectedItem.name}</h4>
-                  <p className="text-sm text-gray-400">{selectedItem.category}</p>
-                </div>
-              </div>
-              
-              <div className="bg-gray-800 rounded-lg p-4 mb-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-300">Price:</span>
-                  <span className="text-2xl font-bold text-blue-400">{selectedItem.price}</span>
-                </div>
-                <div className="text-sm text-gray-400 mt-1">
-                  {selectedItem.calls || selectedItem.type || 'One-time purchase'}
-                </div>
-              </div>
-              
-              <div className="text-sm text-gray-300">
-                <p>• Verified provider: {selectedItem.provider}</p>
-                <p>• Quality rating: ⭐ {selectedItem.rating}</p>
-                {selectedItem.verified && (
-                  <p>• ✓ Verified and audited</p>
-                )}
-              </div>
-              </div>
-              
-            <div className="flex gap-3">
-              <button 
-                onClick={() => setShowPurchaseModal(false)}
-                className="flex-1 px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:border-gray-500 transition-colors"
-              >
-                Cancel
-              </button>
-              <button 
-                onClick={confirmPurchase}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Confirm Purchase
-                </button>
-              </div>
-          </div>
-        </div>
-      )}
+            {/* Payment Modal */}
+      <PaymentModal
+        isOpen={showPurchaseModal}
+        onClose={() => setShowPurchaseModal(false)}
+        item={selectedItem}
+        onSuccess={confirmPurchase}
+      />
 
       {/* Stats Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
