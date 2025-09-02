@@ -229,19 +229,14 @@ export default function PaymentModal({ isOpen, onClose, item, onSuccess }: Payme
 
             {/* Action Buttons */}
             <div className="flex gap-3">
-              <button 
-                onClick={onClose}
-                className="flex-1 px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:border-gray-500 transition-colors"
-              >
-                Cancel
-              </button>
-              <button 
-                onClick={handlePayment}
-                disabled={!Boolean(isConnected) || isPending || isInsufficientBalance}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors"
-              >
-                {isPending ? 'Processing...' : 'Confirm Payment'}
-              </button>
+            <button 
+  onClick={handlePayment}
+  disabled={!Boolean(isConnected ?? false) || isPending === true || isInsufficientBalance === true}
+  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors"
+>
+  {isPending ? 'Processing...' : 'Confirm Payment'}
+</button>
+
             </div>
           </div>
         )}
