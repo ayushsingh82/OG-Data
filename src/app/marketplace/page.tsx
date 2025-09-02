@@ -8,6 +8,12 @@ export default function Marketplace() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 100 });
+  const [sortBy, setSortBy] = useState('relevance');
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [verificationFilter, setVerificationFilter] = useState('all');
 
   const categories = [
     { id: 'all', name: 'All', icon: '🔬' },
@@ -140,17 +146,83 @@ export default function Marketplace() {
     },
   ];
 
-  const renderItems = () => {
+  const allItems = [...researchDatasets, ...aiAgents, ...researchTools];
+  const allTags = Array.from(new Set(allItems.flatMap(item => item.tags)));
+
+  const filteredItems = () => {
+    let items = allItems;
+
+    // Category filter
     switch (activeCategory) {
       case 'datasets':
-        return researchDatasets;
+        items = researchDatasets;
+        break;
       case 'agents':
-        return aiAgents;
+        items = aiAgents;
+        break;
       case 'tools':
-        return researchTools;
+        items = researchTools;
+        break;
       default:
-        return [...researchDatasets, ...aiAgents, ...researchTools];
+        items = allItems;
     }
+
+    // Search filter
+    if (searchQuery) {
+      items = items.filter(item => 
+        (item.title || item.name).toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.provider.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
+    }
+
+    // Price filter
+    items = items.filter(item => {
+      const price = parseInt(item.price.replace(' OG', ''));
+      return price >= priceRange.min && price <= priceRange.max;
+    });
+
+    // Tags filter
+    if (selectedTags.length > 0) {
+      items = items.filter(item => 
+        selectedTags.some(tag => item.tags.includes(tag))
+      );
+    }
+
+    // Verification filter
+    if (verificationFilter !== 'all') {
+      items = items.filter(item => item.verified === (verificationFilter === 'verified'));
+    }
+
+    // Sort
+    switch (sortBy) {
+      case 'price-low':
+        items.sort((a, b) => parseInt(a.price.replace(' OG', '')) - parseInt(b.price.replace(' OG', '')));
+        break;
+      case 'price-high':
+        items.sort((a, b) => parseInt(b.price.replace(' OG', '')) - parseInt(a.price.replace(' OG', '')));
+        break;
+      case 'rating':
+        items.sort((a, b) => b.rating - a.rating);
+        break;
+      case 'downloads':
+        items.sort((a, b) => (b.downloads || b.users) - (a.downloads || a.users));
+        break;
+      default:
+        // Keep original order for relevance
+        break;
+    }
+
+    return items;
+  };
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    );
   };
 
   const handlePurchase = (item: any) => {
