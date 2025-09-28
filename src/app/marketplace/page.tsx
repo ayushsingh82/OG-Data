@@ -343,7 +343,7 @@ export default function Marketplace() {
       case 'downloads':
         items.sort((a, b) => {
           const aCount = isDataset(a) ? a.downloads : a.users;
-          const bCount = isDataset(b) ? b.users;
+          const bCount = isDataset(b) ? b.downloads : b.users;
           return bCount - aCount;
         });
         break;

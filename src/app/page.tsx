@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -96,7 +98,7 @@ export default function Home() {
                 </div>
               )}
 
-              <div className="flex flex-col sm:flex-row gap-4">
+x and               <div className="flex flex-col sm:flex-row gap-4">
                 <button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 flex items-center gap-2 transform hover:scale-105">
                   <span>🚀</span>
                   Explore Marketplace
