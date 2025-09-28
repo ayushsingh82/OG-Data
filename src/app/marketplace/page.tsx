@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PaymentModal from '../components/PaymentModal';
@@ -93,9 +93,9 @@ const isDataset = (item: MarketplaceItem): item is ResearchDataset => {
   return 'downloads' in item;
 };
 
-const isAgent = (item: MarketplaceItem): item is AIAgent => {
-  return 'name' in item && !('type' in item);
-};
+// const isAgent = (item: MarketplaceItem): item is AIAgent => {
+//   return 'name' in item && !('type' in item);
+// };
 
 const isTool = (item: MarketplaceItem): item is ResearchTool => {
   return 'type' in item;
@@ -111,7 +111,7 @@ export default function Marketplace() {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [verificationFilter, setVerificationFilter] = useState('all');
-  const [showVersionHistory, setShowVersionHistory] = useState(false);
+  // const [showVersionHistory, setShowVersionHistory] = useState(false);
   const [showCommunityReviews, setShowCommunityReviews] = useState(false);
   const [showGovernance, setShowGovernance] = useState(false);
 
@@ -414,7 +414,7 @@ export default function Marketplace() {
       <span>•</span>
       <span>Updated {item.lastUpdated}</span>
       <button
-        onClick={() => setShowVersionHistory(true)}
+        onClick={() => console.log('View version history')}
         className="text-blue-400 hover:text-blue-300 underline"
       >
         View History
