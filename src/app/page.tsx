@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 export default function Home() {
+  const [activeFeature, setActiveFeature] = useState('wave3');
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white">
       <Navbar />
@@ -13,26 +15,94 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Text Content */}
             <div className="text-left">
-              <div className="inline-flex items-center px-4 py-2 bg-blue-600/20 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium mb-6">
-                🤖 Powered by 0G Network
+              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-full text-purple-400 text-sm font-medium mb-6">
+                🚀 Wave 3 & 4 Features Live!
               </div>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6">
-                Verifiable{' '}
-                <span className="text-blue-500">AI Data Marketplace</span>
+                Next-Gen{' '}
+                <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">AI Data Marketplace</span>
                 <br />
-                Powered by OG Network
+                with DAO Governance
               </h1>
               <p className="text-xl sm:text-2xl text-gray-300 mb-8">
-                Buy, sell, and deploy verifiable AI agents with massive data storage. 
-                Leverage 0G Storage SDK and AI Inference capabilities for intelligent automation.
+                Experience the future of AI data trading with version tracking, community curation, 
+                NFT tokenization, and decentralized governance powered by 0G Network.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center gap-2">
-                  <span>🚀</span>
-                  Browse AI Agents
+              
+              {/* Feature Toggle */}
+              <div className="flex gap-2 mb-6">
+                <button
+                  onClick={() => setActiveFeature('wave3')}
+                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                    activeFeature === 'wave3' 
+                      ? 'bg-purple-600 text-white' 
+                      : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                  }`}
+                >
+                  Wave 3 Features
                 </button>
-                <button className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
+                <button
+                  onClick={() => setActiveFeature('wave4')}
+                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                    activeFeature === 'wave4' 
+                      ? 'bg-blue-600 text-white' 
+                      : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                  }`}
+                >
+                  Wave 4 Features
+                </button>
+              </div>
+
+              {/* Dynamic Feature Display */}
+              {activeFeature === 'wave3' && (
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                    <div className="text-purple-400 font-semibold mb-2">🔄 Version Tracking</div>
+                    <div className="text-sm text-gray-300">Continuous updates & rollbacks</div>
+                  </div>
+                  <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                    <div className="text-purple-400 font-semibold mb-2">👥 Community Curation</div>
+                    <div className="text-sm text-gray-300">Peer reviews & validation</div>
+                  </div>
+                  <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                    <div className="text-purple-400 font-semibold mb-2">🛡️ Trust Layer</div>
+                    <div className="text-sm text-gray-300">Cryptographic verification</div>
+                  </div>
+                  <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                    <div className="text-purple-400 font-semibold mb-2">⚡ Performance</div>
+                    <div className="text-sm text-gray-300">Optimized for scale</div>
+                  </div>
+                </div>
+              )}
+
+              {activeFeature === 'wave4' && (
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                    <div className="text-blue-400 font-semibold mb-2">💰 Tokenomics</div>
+                    <div className="text-sm text-gray-300">Staking, royalties, slashing</div>
+                  </div>
+                  <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                    <div className="text-blue-400 font-semibold mb-2">🏛️ DAO Governance</div>
+                    <div className="text-sm text-gray-300">Community-driven policies</div>
+                  </div>
+                  <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                    <div className="text-blue-400 font-semibold mb-2">🖼️ NFT Trading</div>
+                    <div className="text-sm text-gray-300">Secondary markets</div>
+                  </div>
+                  <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                    <div className="text-blue-400 font-semibold mb-2">🌐 Interoperability</div>
+                    <div className="text-sm text-gray-300">Cross-protocol bridges</div>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 flex items-center gap-2 transform hover:scale-105">
+                  <span>🚀</span>
                   Explore Marketplace
+                </button>
+                <button className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
+                  View Smart Contracts
                 </button>
               </div>
             </div>
