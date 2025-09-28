@@ -1,24 +1,36 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PaymentModal from '../components/PaymentModal';
 
+// Enhanced interfaces for Wave 3 & 4 features
 interface ResearchDataset {
   id: number;
   title: string;
   category: string;
   description: string;
   price: string;
-  size: string;
-  records: string;
-  quality: string;
   provider: string;
+  downloads: number;
   tags: string[];
   verified: boolean;
-  downloads: number;
+  users: number;
   rating: number;
+  // Wave 3 additions
+  version: string;
+  versionHistory: string[];
+  lastUpdated: string;
+  trustScore: number;
+  verificationScore: number;
+  communityScore: number;
+  // Wave 4 additions
+  nftId?: number;
+  isNFT: boolean;
+  royalties: number;
+  stakingAmount: number;
+  governanceVotes: number;
 }
 
 interface AIAgent {
@@ -27,13 +39,24 @@ interface AIAgent {
   category: string;
   description: string;
   price: string;
-  calls: string;
-  accuracy: string;
   provider: string;
+  users: number;
   tags: string[];
   verified: boolean;
-  users: number;
   rating: number;
+  // Wave 3 additions
+  version: string;
+  versionHistory: string[];
+  lastUpdated: string;
+  trustScore: number;
+  verificationScore: number;
+  communityScore: number;
+  // Wave 4 additions
+  nftId?: number;
+  isNFT: boolean;
+  royalties: number;
+  stakingAmount: number;
+  governanceVotes: number;
 }
 
 interface ResearchTool {
@@ -42,23 +65,36 @@ interface ResearchTool {
   category: string;
   description: string;
   price: string;
-  type: string;
   provider: string;
+  users: number;
   tags: string[];
   verified: boolean;
-  users: number;
   rating: number;
+  type: string;
+  // Wave 3 additions
+  version: string;
+  versionHistory: string[];
+  lastUpdated: string;
+  trustScore: number;
+  verificationScore: number;
+  communityScore: number;
+  // Wave 4 additions
+  nftId?: number;
+  isNFT: boolean;
+  royalties: number;
+  stakingAmount: number;
+  governanceVotes: number;
 }
 
 type MarketplaceItem = ResearchDataset | AIAgent | ResearchTool;
 
 // Type guards
 const isDataset = (item: MarketplaceItem): item is ResearchDataset => {
-  return 'size' in item;
+  return 'downloads' in item;
 };
 
 const isAgent = (item: MarketplaceItem): item is AIAgent => {
-  return 'calls' in item;
+  return 'name' in item && !('type' in item);
 };
 
 const isTool = (item: MarketplaceItem): item is ResearchTool => {
@@ -75,6 +111,9 @@ export default function Marketplace() {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [verificationFilter, setVerificationFilter] = useState('all');
+  const [showVersionHistory, setShowVersionHistory] = useState(false);
+  const [showCommunityReviews, setShowCommunityReviews] = useState(false);
+  const [showGovernance, setShowGovernance] = useState(false);
 
   const categories = [
     { id: 'all', name: 'All', icon: '🔬' },
@@ -85,129 +124,159 @@ export default function Marketplace() {
     { id: 'services', name: 'Services', icon: '⚡' },
   ];
 
-  const researchDatasets = [
+  // Enhanced sample data with Wave 3 & 4 features
+  const researchDatasets: ResearchDataset[] = [
     {
       id: 1,
-      title: 'Global Climate Data 2020-2024',
-      category: 'Climate Science',
-      description: 'Comprehensive climate dataset including temperature, precipitation, humidity, and atmospheric pressure from 150+ weather stations worldwide.',
-      price: '18 OG',
-      size: '15.2 GB',
-      records: '2.3M',
-      quality: '98.5%',
-      provider: 'Climate Research Institute',
-      tags: ['climate', 'weather', 'global', 'temperature', 'precipitation'],
-      verified: true,
-      downloads: 1247,
-      rating: 4.8,
-    },
-    {
-      id: 2,
-      title: 'Human Genome Variants Database',
+      title: 'Genomic Sequencing Dataset v2.1',
       category: 'Biotechnology',
-      description: 'Annotated human genome variants with clinical significance, population frequencies, and disease associations.',
+      description: 'Comprehensive genomic data with enhanced privacy protection and updated annotations.',
       price: '25 OG',
-      size: '8.7 GB',
-      records: '890K',
-      quality: '99.2%',
-      provider: 'Genomics Research Lab',
-      tags: ['genomics', 'human', 'variants', 'clinical', 'disease'],
+      provider: 'BioGen Labs',
+      downloads: 1250,
+      tags: ['genomics', 'biotech', 'medical', 'privacy-enhanced'],
       verified: true,
-      downloads: 892,
-      rating: 4.9,
-    },
-    {
-      id: 3,
-      title: 'Quantum Computing Benchmark Results',
-      category: 'Physics',
-      description: 'Performance benchmarks for quantum algorithms across different quantum computing platforms and error correction methods.',
-      price: '15 OG',
-      size: '3.4 GB',
-      records: '156K',
-      quality: '97.8%',
-      provider: 'Quantum Research Center',
-      tags: ['quantum', 'computing', 'benchmarks', 'algorithms', 'performance'],
-      verified: true,
-      downloads: 567,
-      rating: 4.7,
-    },
-  ];
-
-  const aiAgents = [
-    {
-      id: 1,
-      name: 'DataAnalyzer Pro',
-      category: 'Data Analysis',
-      description: 'Advanced statistical analysis agent with machine learning capabilities for research data processing and visualization.',
-      price: '20 OG',
-      calls: '0.05 OG per call',
-      accuracy: '94.2%',
-      provider: 'Data Science Lab',
-      tags: ['analysis', 'statistics', 'ml', 'visualization', 'research'],
-      verified: true,
-      users: 2341,
+      users: 89,
       rating: 4.8,
+      version: '2.1.0',
+      versionHistory: ['1.0.0', '1.5.0', '2.0.0', '2.1.0'],
+      lastUpdated: '2024-01-15',
+      trustScore: 95,
+      verificationScore: 98,
+      communityScore: 92,
+      nftId: 1001,
+      isNFT: true,
+      royalties: 5,
+      stakingAmount: 5000,
+      governanceVotes: 156
     },
     {
       id: 2,
-      name: 'LiteratureReview Bot',
-      category: 'Research Assistant',
-      description: 'AI-powered literature review agent that summarizes research papers, identifies key findings, and suggests related works.',
+      title: 'Climate Change Models v1.3',
+      category: 'Climate Science',
+      description: 'Advanced climate modeling data with improved accuracy and extended time series.',
       price: '18 OG',
-      calls: '0.03 OG per call',
-      accuracy: '91.5%',
-      provider: 'Academic AI Lab',
-      tags: ['literature', 'review', 'papers', 'summarization', 'academic'],
+      provider: 'ClimateAI',
+      downloads: 890,
+      tags: ['climate', 'environment', 'modeling', 'sustainability'],
       verified: true,
-      users: 1892,
+      users: 67,
       rating: 4.6,
+      version: '1.3.0',
+      versionHistory: ['1.0.0', '1.1.0', '1.2.0', '1.3.0'],
+      lastUpdated: '2024-01-12',
+      trustScore: 88,
+      verificationScore: 90,
+      communityScore: 85,
+      nftId: 1002,
+      isNFT: true,
+      royalties: 3,
+      stakingAmount: 3200,
+      governanceVotes: 98
     },
     {
       id: 3,
-      name: 'CollaborationFinder',
-      category: 'Networking',
-      description: 'Intelligent agent that finds potential research collaborators based on expertise, interests, and project requirements.',
-      price: '22 OG',
-      calls: '0.02 OG per call',
-      accuracy: '89.7%',
-      provider: 'Research Network Lab',
-      tags: ['collaboration', 'networking', 'researchers', 'matching', 'expertise'],
+      title: 'Quantum Computing Benchmarks v3.0',
+      category: 'Physics',
+      description: 'Latest quantum computing performance benchmarks across multiple platforms.',
+      price: '35 OG',
+      provider: 'QuantumTech',
+      downloads: 456,
+      tags: ['quantum', 'computing', 'benchmarks', 'physics'],
       verified: true,
-      users: 1456,
-      rating: 4.5,
-    },
+      users: 34,
+      rating: 4.9,
+      version: '3.0.0',
+      versionHistory: ['1.0.0', '2.0.0', '2.5.0', '3.0.0'],
+      lastUpdated: '2024-01-18',
+      trustScore: 92,
+      verificationScore: 95,
+      communityScore: 89,
+      nftId: 1003,
+      isNFT: true,
+      royalties: 7,
+      stakingAmount: 7500,
+      governanceVotes: 203
+    }
   ];
 
-  const researchTools = [
+  const aiAgents: AIAgent[] = [
     {
       id: 1,
-      title: 'Research Workflow Manager',
-      category: 'Productivity',
-      description: 'Comprehensive tool for managing research projects, timelines, team collaboration, and progress tracking.',
-      price: '30 OG',
-      type: 'Software License',
-      provider: 'Research Tools Inc.',
-      tags: ['workflow', 'management', 'collaboration', 'tracking', 'productivity'],
+      name: 'DeFi Analysis Bot v2.2',
+      category: 'Blockchain Analytics',
+      description: 'Advanced DeFi protocol analysis with enhanced risk assessment capabilities.',
+      price: '15 OG',
+      provider: 'DeFiInsights',
+      users: 234,
+      tags: ['defi', 'blockchain', 'analytics', 'risk-assessment'],
       verified: true,
-      users: 892,
       rating: 4.7,
+      version: '2.2.0',
+      versionHistory: ['1.0.0', '1.5.0', '2.0.0', '2.1.0', '2.2.0'],
+      lastUpdated: '2024-01-16',
+      trustScore: 91,
+      verificationScore: 93,
+      communityScore: 88,
+      nftId: 2001,
+      isNFT: true,
+      royalties: 4,
+      stakingAmount: 2800,
+      governanceVotes: 127
     },
     {
       id: 2,
-      title: 'Data Visualization Suite',
-      category: 'Visualization',
-      description: 'Advanced data visualization toolkit with interactive charts, graphs, and 3D modeling capabilities.',
-      price: '28 OG',
-      type: 'Software License',
-      provider: 'Visual Analytics Lab',
-      tags: ['visualization', 'charts', 'graphs', '3D', 'interactive'],
+      name: 'Medical Research Assistant v1.8',
+      category: 'Medical AI',
+      description: 'AI assistant for medical research with improved accuracy and new disease models.',
+      price: '22 OG',
+      provider: 'MedAI Solutions',
+      users: 156,
+      tags: ['medical', 'research', 'ai', 'healthcare'],
       verified: true,
-      users: 1234,
       rating: 4.8,
-    },
+      version: '1.8.0',
+      versionHistory: ['1.0.0', '1.2.0', '1.4.0', '1.6.0', '1.8.0'],
+      lastUpdated: '2024-01-14',
+      trustScore: 94,
+      verificationScore: 96,
+      communityScore: 91,
+      nftId: 2002,
+      isNFT: true,
+      royalties: 6,
+      stakingAmount: 4200,
+      governanceVotes: 189
+    }
   ];
 
-  const allItems = [...researchDatasets, ...aiAgents, ...researchTools];
+  const researchTools: ResearchTool[] = [
+    {
+      id: 1,
+      title: 'Data Visualization Suite v4.1',
+      category: 'Analytics',
+      description: 'Comprehensive data visualization tools with new chart types and export options.',
+      price: '12 OG',
+      provider: 'VizTech',
+      users: 445,
+      tags: ['visualization', 'analytics', 'charts', 'data'],
+      verified: true,
+      rating: 4.5,
+      type: 'Software',
+      version: '4.1.0',
+      versionHistory: ['3.0.0', '3.5.0', '4.0.0', '4.1.0'],
+      lastUpdated: '2024-01-13',
+      trustScore: 87,
+      verificationScore: 89,
+      communityScore: 84,
+      nftId: 3001,
+      isNFT: true,
+      royalties: 2,
+      stakingAmount: 1800,
+      governanceVotes: 76
+    }
+  ];
+
+  const allItems: MarketplaceItem[] = [...researchDatasets, ...aiAgents, ...researchTools];
   const allTags = Array.from(new Set(allItems.flatMap(item => item.tags)));
 
   const filteredItems = () => {
@@ -268,15 +337,20 @@ export default function Marketplace() {
       case 'rating':
         items.sort((a, b) => b.rating - a.rating);
         break;
+      case 'trust-score':
+        items.sort((a, b) => b.trustScore - a.trustScore);
+        break;
       case 'downloads':
         items.sort((a, b) => {
           const aCount = isDataset(a) ? a.downloads : a.users;
-          const bCount = isDataset(b) ? b.downloads : b.users;
+          const bCount = isDataset(b) ? b.users;
           return bCount - aCount;
         });
         break;
+      case 'recent':
+        items.sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime());
+        break;
       default:
-        // Keep original order for relevance
         break;
     }
 
@@ -302,308 +376,310 @@ export default function Marketplace() {
     setSelectedItem(null);
   };
 
+  const renderTrustScore = (item: MarketplaceItem) => {
+    const getScoreColor = (score: number) => {
+      if (score >= 90) return 'text-green-400';
+      if (score >= 80) return 'text-yellow-400';
+      if (score >= 70) return 'text-orange-400';
+      return 'text-red-400';
+    };
+
+    return (
+      <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1">
+          <span className="text-xs text-gray-400">Trust:</span>
+          <span className={`text-sm font-semibold ${getScoreColor(item.trustScore)}`}>
+            {item.trustScore}%
+          </span>
+        </div>
+        <div className="flex items-center space-x-1">
+          <span className="text-xs text-gray-400">Verification:</span>
+          <span className={`text-sm font-semibold ${getScoreColor(item.verificationScore)}`}>
+            {item.verificationScore}%
+          </span>
+        </div>
+        <div className="flex items-center space-x-1">
+          <span className="text-xs text-gray-400">Community:</span>
+          <span className={`text-sm font-semibold ${getScoreColor(item.communityScore)}`}>
+            {item.communityScore}%
+          </span>
+        </div>
+      </div>
+    );
+  };
+
+  const renderVersionInfo = (item: MarketplaceItem) => (
+    <div className="flex items-center space-x-2 text-xs text-gray-400">
+      <span>v{item.version}</span>
+      <span>•</span>
+      <span>Updated {item.lastUpdated}</span>
+      <button
+        onClick={() => setShowVersionHistory(true)}
+        className="text-blue-400 hover:text-blue-300 underline"
+      >
+        View History
+      </button>
+    </div>
+  );
+
+  const renderNFTInfo = (item: MarketplaceItem) => (
+    <div className="flex items-center space-x-2 text-xs">
+      {item.isNFT && (
+        <div className="flex items-center space-x-1">
+          <span className="text-purple-400">🖼️</span>
+          <span className="text-purple-400">NFT #{item.nftId}</span>
+        </div>
+      )}
+      <div className="flex items-center space-x-1">
+        <span className="text-green-400">💰</span>
+        <span className="text-green-400">{item.royalties}% royalties</span>
+      </div>
+      <div className="flex items-center space-x-1">
+        <span className="text-blue-400">🔒</span>
+        <span className="text-blue-400">{item.stakingAmount} OG staked</span>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white">
+    <div className="min-h-screen bg-black text-white">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-600/20 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium mb-6">
-              🤖 AI Agent Marketplace
-            </div>
-            <h1 className="text-4xl sm:text-6xl font-bold mb-6">
-              Verifiable <span className="text-blue-500">AI Agents</span> Marketplace
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-              Discover, purchase, and deploy AI agents with Proof of Execution (PoE) verification. 
-              All agents priced in OG tokens for transparent trading.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
-                Browse AI Agents
-              </button>
+      <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            OG-Data Marketplace
+          </h1>
+          <p className="text-xl text-gray-300 mb-6">
+            Verifiable AI Data & Agent Marketplace with Community Governance
+          </p>
+          
+          {/* Wave 3 & 4 Features Banner */}
+          <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-lg p-4 mb-6">
+            <div className="flex items-center justify-center space-x-6 text-sm">
+              <div className="flex items-center space-x-2">
+                <span className="text-green-400">✅</span>
+                <span>Version Tracking</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-blue-400">🔍</span>
+                <span>Community Curation</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-purple-400">🛡️</span>
+                <span>Cryptographic Verification</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-yellow-400">🖼️</span>
+                <span>NFT Tokenization</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-red-400">🏛️</span>
+                <span>DAO Governance</span>
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Search and Filters */}
-      <section className="py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          {/* Search Bar */}
-          <div className="mb-8">
-            <div className="relative max-w-2xl mx-auto">
-              <input
-                type="text"
-                placeholder="Search agents, datasets, tools..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-4 bg-black/50 border border-gray-800 rounded-lg focus:border-blue-500 focus:outline-none text-white placeholder-gray-400"
-              />
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-                🔍
-              </div>
-            </div>
+        {/* Search and Filters */}
+        <div className="flex flex-col lg:flex-row gap-4 mb-8">
+          <div className="flex-1">
+            <input
+              type="text"
+              placeholder="Search datasets, agents, and tools..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none"
+            />
           </div>
-
-          {/* Categories */}
-          <div className="flex flex-wrap justify-center gap-4 mb-6">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 ${
-                  activeCategory === category.id
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-black/50 border border-gray-800 text-gray-300 hover:border-blue-500/50 hover:text-blue-400'
-                }`}
-              >
-                <span>{category.icon}</span>
-                {category.name}
-              </button>
-            ))}
-              </div>
-              
-          {/* Filter Toggle */}
-          <div className="flex justify-center mb-6">
+          
+          <div className="flex gap-2">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg hover:border-blue-500 transition-colors"
+              className="px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors"
             >
-              <span>🔧</span>
-              Advanced Filters
-              <span className={`transform transition-transform ${showFilters ? 'rotate-180' : ''}`}>
-                ▼
-              </span>
+              Filters
+            </button>
+            <button
+              onClick={() => setShowCommunityReviews(!showCommunityReviews)}
+              className="px-4 py-3 bg-blue-600 border border-blue-500 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Community Reviews
+            </button>
+            <button
+              onClick={() => setShowGovernance(!showGovernance)}
+              className="px-4 py-3 bg-purple-600 border border-purple-500 rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              Governance
             </button>
           </div>
+        </div>
 
-          {/* Advanced Filters */}
-          {showFilters && (
-            <div className="bg-black/50 border border-gray-800 rounded-xl p-6 mb-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Price Range */}
-                <div>
-                  <label className="block text-sm font-medium mb-3">Price Range (OG)</label>
-                  <div className="space-y-2">
-                    <div className="flex gap-2">
-                      <input
-                        type="number"
-                        placeholder="Min"
-                        value={priceRange.min}
-                        onChange={(e) => setPriceRange(prev => ({ ...prev, min: parseInt(e.target.value) || 0 }))}
-                        className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white text-sm"
-                      />
-                      <input
-                        type="number"
-                        placeholder="Max"
-                        value={priceRange.max}
-                        onChange={(e) => setPriceRange(prev => ({ ...prev, max: parseInt(e.target.value) || 100 }))}
-                        className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white text-sm"
-                      />
-                    </div>
-                    <div className="text-xs text-gray-400">
-                      Range: {priceRange.min} - {priceRange.max} OG
-                    </div>
-                  </div>
+        {/* Filters Panel */}
+        {showFilters && (
+          <div className="bg-gray-800 rounded-lg p-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label className="block text-sm font-medium mb-2">Price Range</label>
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="number"
+                    placeholder="Min"
+                    value={priceRange.min}
+                    onChange={(e) => setPriceRange(prev => ({ ...prev, min: parseInt(e.target.value) || 0 }))}
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
+                  />
+                  <span>-</span>
+                  <input
+                    type="number"
+                    placeholder="Max"
+                    value={priceRange.max}
+                    onChange={(e) => setPriceRange(prev => ({ ...prev, max: parseInt(e.target.value) || 100 }))}
+                    className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
+                  />
                 </div>
-
-                {/* Verification Filter */}
-                <div>
-                  <label className="block text-sm font-medium mb-3">Verification</label>
-                  <select
-                    value={verificationFilter}
-                    onChange={(e) => setVerificationFilter(e.target.value)}
-                    className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white text-sm"
-                  >
-                    <option value="all">All Items</option>
-                    <option value="verified">Verified Only</option>
-                    <option value="unverified">Unverified Only</option>
-                  </select>
-                </div>
-
-                {/* Sort By */}
-                <div>
-                  <label className="block text-sm font-medium mb-3">Sort By</label>
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white text-sm"
-                  >
-                    <option value="relevance">Relevance</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="rating">Rating</option>
-                    <option value="downloads">Popularity</option>
-                  </select>
-              </div>
               </div>
               
-              {/* Tags Filter */}
-              <div className="mt-6">
-                <label className="block text-sm font-medium mb-3">Tags</label>
-                <div className="flex flex-wrap gap-2">
-                  {allTags.slice(0, 20).map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => toggleTag(tag)}
-                      className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                        selectedTags.includes(tag)
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                      }`}
-                    >
-                      #{tag}
-                    </button>
-                  ))}
-                </div>
-                {selectedTags.length > 0 && (
-                  <div className="mt-3">
-                    <button
-                      onClick={() => setSelectedTags([])}
-                      className="text-sm text-blue-400 hover:text-blue-300"
-                    >
-                      Clear all tags
-                </button>
-                  </div>
-                )}
+              <div>
+                <label className="block text-sm font-medium mb-2">Sort By</label>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
+                >
+                  <option value="relevance">Relevance</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Rating</option>
+                  <option value="trust-score">Trust Score</option>
+                  <option value="downloads">Downloads/Users</option>
+                  <option value="recent">Recently Updated</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium mb-2">Verification</label>
+                <select
+                  value={verificationFilter}
+                  onChange={(e) => setVerificationFilter(e.target.value)}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
+                >
+                  <option value="all">All Items</option>
+                  <option value="verified">Verified Only</option>
+                  <option value="unverified">Unverified Only</option>
+                </select>
               </div>
             </div>
-          )}
-        </div>
-      </section>
-
-      {/* Marketplace Items */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h2 className="text-3xl font-bold">
-                {activeCategory === 'all' ? 'All AI Agents & Tools' : 
-                 activeCategory === 'datasets' ? 'Research Datasets' :
-                 activeCategory === 'agents' ? 'AI Agents' :
-                 activeCategory === 'tools' ? 'Research Tools' : 'AI Items'}
-              </h2>
-              <p className="text-gray-400 mt-2">
-                {filteredItems().length} items found
-                {searchQuery && ` for "${searchQuery}"`}
-                {selectedTags.length > 0 && ` with tags: ${selectedTags.join(', ')}`}
-              </p>
-                </div>
-            <div className="flex items-center gap-4">
-              <a
-                href="/list-agent"
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200"
-              >
-                + List Your Agent
-              </a>
-                </div>
-              </div>
-              
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {filteredItems().map((item) => {
-              // Create unique key based on item type and ID
-              const itemType = isDataset(item) ? 'dataset' : isAgent(item) ? 'agent' : 'tool';
-              const uniqueKey = `${itemType}-${item.id}`;
-              
-              return (
-              <div key={uniqueKey} className="bg-black/50 border border-gray-800 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-105">
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <span className="text-xl">
-                      {item.category === 'Data Analysis' || item.category === 'Research Assistant' || item.category === 'Networking' ? '🤖' :
-                       item.category === 'Climate Science' ? '🌍' :
-                       item.category === 'Biotechnology' ? '🧬' :
-                       item.category === 'Physics' ? '🔬' :
-                       item.category === 'Productivity' ? '⚡' :
-                       item.category === 'Visualization' ? '📊' : '🔬'}
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-xl font-bold text-blue-400">{item.price}</div>
-                    <div className="text-sm text-gray-400">
-                      {isAgent(item) ? item.calls : isTool(item) ? item.type : 'One-time purchase'}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-bold mb-3">
-                  <a 
-                    href={`/agent/${item.id}`}
-                    className="hover:text-blue-400 transition-colors"
+            
+            <div className="mt-4">
+              <label className="block text-sm font-medium mb-2">Tags</label>
+              <div className="flex flex-wrap gap-2">
+                {allTags.map(tag => (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                      selectedTags.includes(tag)
+                        ? 'bg-purple-600 text-white'
+                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    }`}
                   >
-                    {isDataset(item) || isTool(item) ? item.title : item.name}
-                  </a>
-                </h3>
-                <p className="text-gray-300 mb-4 text-sm line-clamp-3">{item.description}</p>
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                  {isDataset(item) && (
-                    <>
-                      <div className="text-gray-400">
-                        <span className="text-blue-400">Size:</span> {item.size}
-                      </div>
-                      <div className="text-gray-400">
-                        <span className="text-blue-400">Records:</span> {item.records}
-                      </div>
-                      <div className="text-gray-400">
-                        <span className="text-blue-400">Quality:</span> {item.quality}
-                      </div>
-                    </>
-                  )}
-                  {isAgent(item) && (
-                    <div className="text-gray-400">
-                      <span className="text-blue-400">Accuracy:</span> {item.accuracy}
-                    </div>
+        {/* Categories */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {categories.map(category => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={`px-4 py-2 rounded-lg transition-colors ${
+                activeCategory === category.id
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+              }`}
+            >
+              <span className="mr-2">{category.icon}</span>
+              {category.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Items Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredItems().map(item => {
+            const title = isDataset(item) || isTool(item) ? item.title : item.name;
+            const downloads = isDataset(item) ? item.downloads : item.users;
+            
+            return (
+              <div key={item.id} className="bg-gray-800 rounded-lg p-6 hover:bg-gray-750 transition-colors">
+                <div className="flex justify-between items-start mb-4">
+                  <h3 className="text-xl font-semibold text-white">{title}</h3>
+                  {item.verified && (
+                    <span className="bg-green-600 text-white px-2 py-1 rounded-full text-xs">
+                      ✓ Verified
+                    </span>
                   )}
                 </div>
-
-                {/* Provider */}
-                <div className="flex items-center gap-2 mb-4 text-sm">
-                  <span className="text-gray-400">Provider:</span>
-                  <span className="text-blue-400 font-medium">{item.provider}</span>
-                  {item.verified && (
-                    <span className="text-green-400 text-xs">✓ Verified</span>
-                  )}
-              </div>
-              
-                {/* Tags */}
+                
+                <p className="text-gray-300 mb-4 line-clamp-3">{item.description}</p>
+                
+                <div className="space-y-2 mb-4">
+                  {renderVersionInfo(item)}
+                  {renderTrustScore(item)}
+                  {renderNFTInfo(item)}
+                </div>
+                
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-4 text-sm text-gray-400">
+                    <span>⭐ {item.rating}</span>
+                    <span>👥 {downloads}</span>
+                    <span>🏷️ {item.category}</span>
+                  </div>
+                  <div className="text-lg font-bold text-purple-400">{item.price}</div>
+                </div>
+                
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {item.tags.slice(0, 4).map((tag, index) => (
-                    <span key={index} className="px-2 py-1 bg-blue-600/20 border border-blue-500/30 rounded-full text-blue-400 text-xs">
+                  {item.tags.slice(0, 3).map(tag => (
+                    <span key={tag} className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">
                       {tag}
                     </span>
                   ))}
-              </div>
-              
-                {/* Footer */}
-              <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 text-sm text-gray-400">
-                    <span>⭐ {item.rating}</span>
-                    <span>
-                      {isDataset(item) ? `📥 ${item.downloads}` : `👥 ${item.users}`}
-                    </span>
-                  </div>
-                  <button 
+                  {item.tags.length > 3 && (
+                    <span className="text-gray-500 text-xs">+{item.tags.length - 3} more</span>
+                  )}
+                </div>
+                
+                <div className="flex gap-2">
+                  <button
                     onClick={() => handlePurchase(item)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+                    className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
                   >
                     Purchase
                   </button>
+                  <button className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors">
+                    Details
+                  </button>
                 </div>
               </div>
-              );
-            })}
-          </div>
+            );
+          })}
         </div>
-      </section>
 
-            {/* Payment Modal */}
+        {filteredItems().length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-400 text-lg">No items found matching your criteria.</p>
+          </div>
+        )}
+      </div>
+
+      {/* Payment Modal */}
       <PaymentModal
         isOpen={showPurchaseModal}
         onClose={() => setShowPurchaseModal(false)}
@@ -611,37 +687,7 @@ export default function Marketplace() {
         onSuccess={confirmPurchase}
       />
 
-      {/* Stats Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">
-              Marketplace <span className="text-blue-500">Statistics</span>
-            </h2>
-            <p className="text-xl text-gray-300">Join thousands of users trading AI agents and data</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-500 mb-2">500+</div>
-              <p className="text-gray-300">Active Users</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-green-500 mb-2">1,200+</div>
-              <p className="text-gray-300">AI Agents</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-purple-500 mb-2">8,000+</div>
-              <p className="text-gray-300">Transactions</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-orange-500 mb-2">$1.2M+</div>
-              <p className="text-gray-300">OG Tokens Traded</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );
-}   
+}
