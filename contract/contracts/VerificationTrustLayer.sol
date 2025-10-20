@@ -472,3 +472,4 @@ contract VerificationTrustLayer is Ownable, ReentrancyGuard {
         emit TrustScoreUpdated(itemId, itemType, score.overallScore);
     }
 }
+

@@ -380,3 +380,4 @@ contract VersionedAgent is Ownable, ReentrancyGuard {
         return _versionCounter.current();
     }
 }
+

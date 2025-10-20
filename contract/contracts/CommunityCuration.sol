@@ -440,3 +440,4 @@ contract CommunityCuration is Ownable, ReentrancyGuard {
         emit ReviewerReputationUpdated(reviewer, profile.reputationScore);
     }
 }
+
