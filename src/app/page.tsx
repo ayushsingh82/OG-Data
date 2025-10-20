@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -27,13 +28,13 @@ export default function Home() {
                 Leverage 0G Storage SDK and AI Inference capabilities for intelligent automation.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center gap-2">
-                  <span>🚀</span>
-                  Browse AI Agents
-                </button>
-                <button className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
-                  Explore Marketplace
-                </button>
+                <Link href="/wave5" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center gap-2">
+                  <span>🔮</span>
+                  Explore Wave 5
+                </Link>
+                <Link href="/contract-testing" className="border border-green-500 text-green-400 hover:bg-green-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
+                  Test Contracts
+                </Link>
               </div>
             </div>
 

@@ -31,8 +31,14 @@ const Navbar = () => {
               <Link href="/dashboard" className="text-white hover:text-blue-400 transition-colors duration-200">
                 Dashboard 
               </Link>
+              <Link href="/wave5" className="text-white hover:text-purple-400 transition-colors duration-200">
+                Wave 5 
+              </Link>
               <Link href="/marketplace" className="text-white hover:text-blue-400 transition-colors duration-200">
                 AI Agents 
+              </Link>
+              <Link href="/contract-testing" className="text-white hover:text-green-400 transition-colors duration-200">
+                Contract Testing
               </Link>
               <Link href="/list-agent" className="text-white hover:text-blue-400 transition-colors duration-200">
                 List Agent
@@ -75,11 +81,25 @@ const Navbar = () => {
                 Dashboard
               </Link>
               <Link 
+                href="/wave5" 
+                className="text-white hover:text-purple-400 block px-3 py-2 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Wave 5
+              </Link>
+              <Link 
                 href="/marketplace" 
                 className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 AI Agents
+              </Link>
+              <Link 
+                href="/contract-testing" 
+                className="text-white hover:text-green-400 block px-3 py-2 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contract Testing
               </Link>
               <Link 
                 href="/list-agent" 
