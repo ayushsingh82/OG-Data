@@ -85,74 +85,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Wave 3 Features Section */}
+      {/* Wave 5 Features Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-full text-purple-400 text-sm font-medium mb-6">
-              🚀 Wave 3 Features - LIVE!
+              🔮 Wave 5 Features - LIVE!
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Wave 3 Implementation</span>
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Wave 5 Implementation</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Implement update mechanisms for both datasets and AI agents, ensuring continuous improvement and version tracking
+              Fully decentralized, self-sustaining economy with advanced AI capabilities, privacy features, and enterprise-grade compliance
             </p>
           </div>
 
           <div className="space-y-8">
-            {/* Completed Features */}
+            {/* Wave 5 Features */}
             <div>
               <h3 className="text-2xl font-semibold text-green-400 mb-6 flex items-center">
-                <span className="mr-3">✅</span>
-                Completed Features
+                <span className="mr-3">🔮</span>
+                Wave 5 Features - Fully Implemented
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6">
-                  <div className="text-green-400 font-semibold mb-2 text-lg">✅ Version Tracking</div>
-                  <div className="text-sm text-gray-300">Continuous updates & rollbacks for datasets and AI agents</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 hover:border-green-500/50 transition-all duration-300">
+                  <div className="text-green-400 font-semibold mb-2 text-lg">🔐 Zero-Knowledge Queries</div>
+                  <div className="text-sm text-gray-300">Privacy-preserving data access with verifiable queries using ZK proofs</div>
                 </div>
-                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6">
-                  <div className="text-green-400 font-semibold mb-2 text-lg">✅ Community Curation</div>
-                  <div className="text-sm text-gray-300">Peer reviews & validation systems</div>
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 hover:border-green-500/50 transition-all duration-300">
+                  <div className="text-green-400 font-semibold mb-2 text-lg">🆔 Reputation & Identity Layer</div>
+                  <div className="text-sm text-gray-300">DID + reputation scoring for datasets, agents & contributors</div>
                 </div>
-                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6">
-                  <div className="text-green-400 font-semibold mb-2 text-lg">✅ Trust Layer</div>
-                  <div className="text-sm text-gray-300">Cryptographic verification</div>
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 hover:border-green-500/50 transition-all duration-300">
+                  <div className="text-green-400 font-semibold mb-2 text-lg">🤖 Autonomous AI Agents</div>
+                  <div className="text-sm text-gray-300">Self-improving agents that stake & earn in autonomous marketplace</div>
                 </div>
-                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6">
-                  <div className="text-green-400 font-semibold mb-2 text-lg">✅ Performance</div>
-                  <div className="text-sm text-gray-300">Optimized for scale</div>
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 hover:border-green-500/50 transition-all duration-300">
+                  <div className="text-green-400 font-semibold mb-2 text-lg">🔗 AI Agent Composability</div>
+                  <div className="text-sm text-gray-300">Chain multiple agents into pipelines for complex workflows</div>
                 </div>
-              </div>
-            </div>
-
-            {/* Planned Features */}
-            <div>
-              <h3 className="text-2xl font-semibold text-purple-400 mb-6 flex items-center">
-                <span className="mr-3">🚀</span>
-                Planned Features
-              </h3>
-              <div className="grid grid-cols-1 gap-6">
-                <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6">
-                  <div className="text-purple-400 font-semibold mb-3 text-lg">🔄 Update Mechanisms</div>
-                  <div className="text-gray-300">Implement update mechanisms for both datasets and AI agents, ensuring continuous improvement and version tracking</div>
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 hover:border-green-500/50 transition-all duration-300">
+                  <div className="text-green-400 font-semibold mb-2 text-lg">🏛️ Data DAOs</div>
+                  <div className="text-sm text-gray-300">Communities to curate, monetize & govern datasets/agents</div>
                 </div>
-                <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6">
-                  <div className="text-purple-400 font-semibold mb-3 text-lg">👥 Community-Driven Curation</div>
-                  <div className="text-gray-300">Roll out community-driven curation tools for ranking, reviewing, and validating datasets and agents</div>
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 hover:border-green-500/50 transition-all duration-300">
+                  <div className="text-green-400 font-semibold mb-2 text-lg">🏢 Enterprise Integration</div>
+                  <div className="text-sm text-gray-300">APIs & compliance frameworks for enterprise adoption</div>
                 </div>
-                <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6">
-                  <div className="text-purple-400 font-semibold mb-3 text-lg">⚡ Scalability & Performance</div>
-                  <div className="text-gray-300">Optimize scalability and performance, making the marketplace capable of handling large datasets and high query volumes</div>
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 hover:border-green-500/50 transition-all duration-300">
+                  <div className="text-green-400 font-semibold mb-2 text-lg">🧠 On-chain Compute</div>
+                  <div className="text-sm text-gray-300">Train ML models securely on decentralized infrastructure</div>
                 </div>
-                <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6">
-                  <div className="text-purple-400 font-semibold mb-3 text-lg">🛡️ Verification & Trust Layer</div>
-                  <div className="text-gray-300">Strengthen the verification and trust layer, using cryptographic proofs to validate dataset authenticity and AI agent outputs</div>
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 hover:border-green-500/50 transition-all duration-300">
+                  <div className="text-green-400 font-semibold mb-2 text-lg">📊 Prediction Markets</div>
+                  <div className="text-sm text-gray-300">Incentivize verifiable predictions to boost data quality</div>
                 </div>
-                <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6">
-                  <div className="text-purple-400 font-semibold mb-3 text-lg">🏪 Decentralized Marketplace</div>
-                  <div className="text-gray-300">Move towards a fully functional decentralized marketplace with support for monetization, governance, and broader ecosystem integrations</div>
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 hover:border-green-500/50 transition-all duration-300">
+                  <div className="text-green-400 font-semibold mb-2 text-lg">💰 Dynamic Pricing</div>
+                  <div className="text-sm text-gray-300">Market-driven dataset pricing with staking rewards</div>
                 </div>
               </div>
             </div>
@@ -161,24 +151,138 @@ export default function Home() {
           {/* Smart Contracts Showcase */}
           <div className="mt-16">
             <h3 className="text-2xl font-semibold text-center mb-8">
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Smart Contracts</span> Powering Wave 3
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Smart Contracts</span> Powering Wave 5
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="bg-black/50 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
-                    <span className="text-lg">🔄</span>
+                    <span className="text-lg">🔐</span>
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold">VersionedAgent.sol</h4>
-                    <p className="text-purple-400 text-sm">Version Tracking</p>
+                    <h4 className="text-lg font-bold">ZeroKnowledgeQueries.sol</h4>
+                    <p className="text-purple-400 text-sm">Privacy-Preserving Queries</p>
                   </div>
                 </div>
                 <p className="text-gray-300 text-sm mb-4">
-                  AI agent version management with update policies and rollback capabilities.
+                  ZK proof verification for privacy-preserving data access with verifiable queries.
                 </p>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-purple-400">383 lines</span>
+                  <span className="text-purple-400">500+ lines</span>
+                  <span className="text-green-400">✅ Deployed</span>
+                </div>
+              </div>
+
+              <div className="bg-black/50 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-lg">🆔</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold">ReputationIdentityLayer.sol</h4>
+                    <p className="text-purple-400 text-sm">DID & Reputation</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mb-4">
+                  Decentralized identity management with reputation scoring for all entities.
+                </p>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-purple-400">600+ lines</span>
+                  <span className="text-green-400">✅ Deployed</span>
+                </div>
+              </div>
+
+              <div className="bg-black/50 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-lg">🤖</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold">AutonomousAIAgentsMarketplace.sol</h4>
+                    <p className="text-purple-400 text-sm">Self-Improving Agents</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mb-4">
+                  Autonomous AI agents that stake, earn, and self-improve through marketplace interactions.
+                </p>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-purple-400">700+ lines</span>
+                  <span className="text-green-400">✅ Deployed</span>
+                </div>
+              </div>
+
+              <div className="bg-black/50 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-lg">🔗</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold">AIAgentComposability.sol</h4>
+                    <p className="text-purple-400 text-sm">Agent Pipelines</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mb-4">
+                  Chain multiple agents into pipelines for complex data processing workflows.
+                </p>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-purple-400">600+ lines</span>
+                  <span className="text-green-400">✅ Deployed</span>
+                </div>
+              </div>
+
+              <div className="bg-black/50 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-lg">🏛️</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold">DataDAOs.sol</h4>
+                    <p className="text-purple-400 text-sm">Community Governance</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mb-4">
+                  Community-driven governance for datasets and agents with DAO voting systems.
+                </p>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-purple-400">900+ lines</span>
+                  <span className="text-green-400">✅ Deployed</span>
+                </div>
+              </div>
+
+              <div className="bg-black/50 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-lg">🏢</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold">EnterpriseIntegrationLayer.sol</h4>
+                    <p className="text-purple-400 text-sm">Enterprise APIs</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mb-4">
+                  Enterprise-grade APIs and compliance frameworks for large-scale adoption.
+                </p>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-purple-400">800+ lines</span>
+                  <span className="text-green-400">✅ Deployed</span>
+                </div>
+              </div>
+
+              <div className="bg-black/50 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
+                    <span className="text-lg">🧠</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold">OnchainComputeFederatedLearning.sol</h4>
+                    <p className="text-purple-400 text-sm">Decentralized ML</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mb-4">
+                  Secure ML model training on decentralized infrastructure with federated learning.
+                </p>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-purple-400">800+ lines</span>
                   <span className="text-green-400">✅ Deployed</span>
                 </div>
               </div>
@@ -189,15 +293,15 @@ export default function Home() {
                     <span className="text-lg">📊</span>
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold">VersionedDataset.sol</h4>
-                    <p className="text-purple-400 text-sm">Data Versioning</p>
+                    <h4 className="text-lg font-bold">PredictionMarketLayer.sol</h4>
+                    <p className="text-purple-400 text-sm">Quality Prediction</p>
                   </div>
                 </div>
                 <p className="text-gray-300 text-sm mb-4">
-                  Dataset version tracking with access control and update policies.
+                  Prediction markets to incentivize verifiable predictions and boost data quality.
                 </p>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-purple-400">488 lines</span>
+                  <span className="text-purple-400">700+ lines</span>
                   <span className="text-green-400">✅ Deployed</span>
                 </div>
               </div>
@@ -205,37 +309,18 @@ export default function Home() {
               <div className="bg-black/50 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
-                    <span className="text-lg">👥</span>
+                    <span className="text-lg">💰</span>
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold">CommunityCuration.sol</h4>
-                    <p className="text-purple-400 text-sm">Community Governance</p>
+                    <h4 className="text-lg font-bold">DynamicPricingYield.sol</h4>
+                    <p className="text-purple-400 text-sm">Market Pricing</p>
                   </div>
                 </div>
                 <p className="text-gray-300 text-sm mb-4">
-                  Community-driven curation with reviews, ratings, and verification.
+                  Dynamic pricing with staking rewards, lending, leasing, and auction systems.
                 </p>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-purple-400">475 lines</span>
-                  <span className="text-green-400">✅ Deployed</span>
-                </div>
-              </div>
-
-              <div className="bg-black/50 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
-                    <span className="text-lg">🛡️</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold">VerificationTrustLayer.sol</h4>
-                    <p className="text-purple-400 text-sm">Cryptographic Verification</p>
-                  </div>
-                </div>
-                <p className="text-gray-300 text-sm mb-4">
-                  Cryptographic proofs for dataset authenticity and AI agent verification.
-                </p>
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-purple-400">475 lines</span>
+                  <span className="text-purple-400">800+ lines</span>
                   <span className="text-green-400">✅ Deployed</span>
                 </div>
               </div>
@@ -243,8 +328,8 @@ export default function Home() {
 
             <div className="text-center mt-12">
               <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-lg p-6 inline-block">
-                <div className="text-2xl font-bold text-white mb-2">1,821+ Lines of Code</div>
-                <div className="text-gray-300">4 Smart Contracts • Wave 3 Complete • Ready for Deployment</div>
+                <div className="text-2xl font-bold text-white mb-2">6,400+ Lines of Code</div>
+                <div className="text-gray-300">9 Smart Contracts • Wave 5 Complete • Fully Integrated</div>
               </div>
             </div>
           </div>
