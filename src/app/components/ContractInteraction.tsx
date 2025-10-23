@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useAccount, useContractWrite, useContractRead } from 'wagmi';
+import { useAccount } from 'wagmi';
 
 // Contract ABIs would be imported here in a real implementation
 // For now, we'll use placeholder interfaces
@@ -25,7 +25,7 @@ const ContractInteraction: React.FC<ContractInteractionProps> = ({
   description,
   inputs
 }) => {
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
   const [inputValues, setInputValues] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
 

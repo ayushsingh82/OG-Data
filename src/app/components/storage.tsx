@@ -2,11 +2,10 @@
 
 import React, { useState } from 'react';
 import { KvClient } from '@0glabs/0g-ts-sdk';
-import { ethers } from 'ethers';
 
 // Network constants
 // const RPC_URL = 'https://evmrpc-testnet.0g.ai/';
-const INDEXER_RPC = 'https://indexer-storage-testnet-turbo.0g.ai';
+// const INDEXER_RPC = 'https://indexer-storage-testnet-turbo.0g.ai';
 
 // Never expose your private key in frontend/browser in production!
 // const PRIVATE_KEY = process.env.NEXT_PUBLIC_OG_PRIVATE_KEY as string;
@@ -67,7 +66,7 @@ export default function StorageClient() {
     try {
       const kvClient = new KvClient('https://indexer-storage-testnet-turbo.0g.ai'); // use indexer URL
       const keyBytes = Uint8Array.from(new TextEncoder().encode(key));
-      const value = await kvClient.getValue(streamId, ethers.encodeBase64(keyBytes));
+      const value = await kvClient.getValue(streamId, keyBytes);
       setKvValue(value || null);
     } catch (err) {
       console.error(err);
