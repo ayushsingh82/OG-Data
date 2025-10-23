@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AgentForge - AI Agent Infrastructure on SVM Chain",
-  description: "Decentralized AI agents running natively on SVM Chain with modular identity, reputation systems, and verifiable data orchestration for enterprise and DeSci applications.",
+  title: "AgentForge - AI Agent Infrastructure on 0G Network",
+  description: "Decentralized AI agents running natively on 0G Network with modular identity, reputation systems, and verifiable data orchestration for enterprise and DeSci applications.",
 };
 
 export default function RootLayout({
