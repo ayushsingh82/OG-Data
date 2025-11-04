@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import StorageClient from '../components/storage';
@@ -9,6 +9,17 @@ import FineTuningClient from '../components/finetuning';
 
 export default function StorageInferencePage() {
   const [activeTab, setActiveTab] = useState('storage');
+
+  useEffect(() => {
+    // Check URL parameters on mount
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get('tab');
+      if (tab === 'finetuning') {
+        setActiveTab('finetuning');
+      }
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white">

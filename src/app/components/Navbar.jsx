@@ -37,6 +37,9 @@ const Navbar = () => {
               <Link href="/storage" className="text-white hover:text-cyan-400 transition-colors duration-200">
                 Storage & Inference
               </Link>
+              <Link href="/storage?tab=finetuning" className="text-white hover:text-purple-400 transition-colors duration-200">
+                Fine-Tuning
+              </Link>
               <Link href="/marketplace" className="text-white hover:text-blue-400 transition-colors duration-200">
                 AI Agents 
               </Link>
@@ -46,7 +49,7 @@ const Navbar = () => {
               <Link href="/list-agent" className="text-white hover:text-blue-400 transition-colors duration-200">
                 List Agent
               </Link>
-              <Link href="/docs" className="text-white hover:text-yellow-400 transition-colors duration-200">
+              <Link href="/docs" className="text-xs text-gray-400 hover:text-yellow-400 transition-colors duration-200">
                 Docs
               </Link>
              
@@ -101,6 +104,13 @@ const Navbar = () => {
                 Storage & Inference
               </Link>
               <Link 
+                href="/storage?tab=finetuning" 
+                className="text-white hover:text-purple-400 block px-3 py-2 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Fine-Tuning
+              </Link>
+              <Link 
                 href="/marketplace" 
                 className="text-white hover:text-blue-400 block px-3 py-2 transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
@@ -123,7 +133,7 @@ const Navbar = () => {
               </Link>
               <Link 
                 href="/docs" 
-                className="text-white hover:text-yellow-400 block px-3 py-2 transition-colors duration-200"
+                className="text-xs text-gray-400 hover:text-yellow-400 block px-3 py-2 transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Docs

@@ -484,24 +484,6 @@ Inference SDK (@0glabs/0g-serving-broker)
                     {codeStructures[activeSection as keyof typeof codeStructures].structure.trim()}
                   </pre>
                 </div>
-
-                {/* Additional Info */}
-                {activeSection === 'overview' && (
-                  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="bg-black/50 rounded-lg p-4 border border-gray-700">
-                      <div className="text-2xl font-bold text-yellow-400 mb-2">21</div>
-                      <div className="text-sm text-gray-300">Smart Contracts</div>
-                    </div>
-                    <div className="bg-black/50 rounded-lg p-4 border border-gray-700">
-                      <div className="text-2xl font-bold text-yellow-400 mb-2">6,400+</div>
-                      <div className="text-sm text-gray-300">Lines of Code</div>
-                    </div>
-                    <div className="bg-black/50 rounded-lg p-4 border border-gray-700">
-                      <div className="text-2xl font-bold text-yellow-400 mb-2">9</div>
-                      <div className="text-sm text-gray-300">Platform Features</div>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           </div>
