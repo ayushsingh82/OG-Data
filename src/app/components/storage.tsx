@@ -67,7 +67,7 @@ export default function StorageClient() {
       const kvClient = new KvClient('https://indexer-storage-testnet-turbo.0g.ai'); // use indexer URL
       const keyBytes = Uint8Array.from(new TextEncoder().encode(key));
       const value = await kvClient.getValue(streamId, keyBytes);
-      setKvValue(value || null);
+      setKvValue(value ? String(value) : null);
     } catch (err) {
       console.error(err);
       setError((err as Error).message);
