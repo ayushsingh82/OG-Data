@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-export default function Wave5Dashboard() {
+export default function PlatformDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
-    { id: 'overview', name: 'Overview', icon: '🔮' },
+    { id: 'overview', name: 'Overview', icon: '🚀' },
     { id: 'zk-queries', name: 'ZK Queries', icon: '🔐' },
     { id: 'reputation', name: 'Reputation', icon: '🆔' },
     { id: 'agents', name: 'AI Agents', icon: '🤖' },
@@ -26,9 +26,9 @@ export default function Wave5Dashboard() {
         return (
           <div className="space-y-8">
             <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-xl p-8">
-              <h2 className="text-3xl font-bold mb-4">🔮 Wave 5 Dashboard</h2>
+              <h2 className="text-3xl font-bold mb-4">Platform Features Dashboard</h2>
               <p className="text-gray-300 text-lg mb-6">
-                Welcome to the fully decentralized, self-sustaining economy with advanced AI capabilities, 
+                Comprehensive platform for decentralized AI infrastructure with advanced capabilities, 
                 privacy features, and enterprise-grade compliance.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

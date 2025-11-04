@@ -28,9 +28,13 @@ export default function Home() {
                 Leverage 0G Storage SDK and AI Inference capabilities for intelligent automation.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/wave5" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center gap-2">
-                  <span>🔮</span>
-                  Explore Wave 5
+                <Link href="/platform" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center gap-2">
+                  <span>🚀</span>
+                  Explore Platform
+                </Link>
+                <Link href="/storage" className="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center gap-2">
+                  <span>💾</span>
+                  Storage & Inference
                 </Link>
                 <Link href="/contract-testing" className="border border-green-500 text-green-400 hover:bg-green-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
                   Test Contracts
@@ -86,15 +90,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Wave 5 Features Section */}
+      {/* Platform Features Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-full text-purple-400 text-sm font-medium mb-6">
-              🔮 Wave 5 Features - LIVE!
+              🚀 Advanced Platform Features
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Wave 5 Implementation</span>
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Decentralized AI Infrastructure</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Fully decentralized, self-sustaining economy with advanced AI capabilities, privacy features, and enterprise-grade compliance
@@ -102,11 +106,11 @@ export default function Home() {
           </div>
 
           <div className="space-y-8">
-            {/* Wave 5 Features */}
+            {/* Platform Features */}
             <div>
               <h3 className="text-2xl font-semibold text-green-400 mb-6 flex items-center">
-                <span className="mr-3">🔮</span>
-                Wave 5 Features - Fully Implemented
+                <span className="mr-3">✨</span>
+                Core Platform Capabilities
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 hover:border-green-500/50 transition-all duration-300">
@@ -152,7 +156,7 @@ export default function Home() {
           {/* Smart Contracts Showcase */}
           <div className="mt-16">
             <h3 className="text-2xl font-semibold text-center mb-8">
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Smart Contracts</span> Powering Wave 5
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Smart Contract Infrastructure</span>
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="bg-black/50 border border-purple-500/30 rounded-xl p-6 hover:border-purple-500/50 transition-all duration-300">
@@ -329,8 +333,8 @@ export default function Home() {
 
             <div className="text-center mt-12">
               <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-lg p-6 inline-block">
-                <div className="text-2xl font-bold text-white mb-2">6,400+ Lines of Code</div>
-                <div className="text-gray-300">9 Smart Contracts • Wave 5 Complete • Fully Integrated</div>
+                <div className="text-2xl font-bold text-white mb-2">6,400+ Lines of Production Code</div>
+                <div className="text-gray-300">9 Smart Contracts • Fully Integrated • Production Ready</div>
               </div>
             </div>
           </div>
@@ -532,11 +536,11 @@ export default function Home() {
             Join the verifiable AI data marketplace powered by 0G Network
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/wave5" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
-              Explore Wave 5 Features
+            <Link href="/platform" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
+              Explore Platform Features
             </Link>
-            <Link href="/contract-testing" className="border border-green-500 text-green-400 hover:bg-green-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
-              Test Smart Contracts
+            <Link href="/storage" className="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
+              Storage & Inference
             </Link>
           </div>
         </div>
