@@ -8,8 +8,6 @@ const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
     // Add fallbacks for Node.js modules (only for client-side)
     if (!isServer) {
-      // Mark Node.js modules as external to prevent bundling
-      config.externals = config.externals || [];
       const nodeModules = [
         'child_process',
         'crypto',
@@ -24,46 +22,9 @@ const nextConfig: NextConfig = {
         'process',
         'fs',
         'fs/promises',
-        'node:child_process',
-        'node:crypto',
-        'node:stream',
-        'node:path',
-        'node:os',
-        'node:http',
-        'node:https',
-        'node:zlib',
-        'node:util',
-        'node:buffer',
-        'node:process',
-        'node:fs',
-        'node:fs/promises',
       ];
 
-      // Add externals function to handle dynamic imports
-      config.externals.push(({ context, request }, callback) => {
-        if (nodeModules.some(mod => request === mod || request === `node:${mod}` || request.startsWith(`node:${mod}/`))) {
-          return callback(null, `commonjs ${request}`);
-        }
-        callback();
-      });
-
-      // Add aliases to replace node: prefixed modules with empty stubs
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        'node:crypto': false,
-        'node:fs': false,
-        'node:fs/promises': false,
-        'node:path': false,
-        'node:os': false,
-        'node:http': false,
-        'node:https': false,
-        'node:stream': false,
-        'node:util': false,
-        'node:buffer': false,
-        'node:process': false,
-        'node:child_process': false,
-      };
-
+      // Add fallbacks for all Node.js modules
       config.resolve.fallback = {
         ...config.resolve.fallback,
         fs: false,
@@ -81,18 +42,54 @@ const nextConfig: NextConfig = {
         util: false,
         buffer: false,
         process: false,
+        // Add node: prefixed modules
+        'node:child_process': false,
+        'node:crypto': false,
+        'node:stream': false,
+        'node:path': false,
+        'node:os': false,
+        'node:http': false,
+        'node:https': false,
+        'node:zlib': false,
+        'node:util': false,
+        'node:buffer': false,
+        'node:process': false,
+        'node:fs': false,
+        'node:fs/promises': false,
       };
 
       // Use IgnorePlugin to completely ignore these modules
       config.plugins.push(
         new webpack.IgnorePlugin({
           checkResource(resource: string) {
-            return nodeModules.some(
-              (mod) => resource === mod || resource === `node:${mod}` || resource.startsWith(`node:${mod}/`)
+            // Check for both regular and node: prefixed modules
+            const isNodeModule = nodeModules.some(
+              (mod) => 
+                resource === mod || 
+                resource === `node:${mod}` || 
+                resource.startsWith(`node:${mod}/`) ||
+                resource.includes(`/${mod}`)
             );
+            return isNodeModule;
           },
         })
       );
+
+      // Add NormalModuleReplacementPlugin to replace dynamic imports
+      nodeModules.forEach((mod) => {
+        config.plugins.push(
+          new webpack.NormalModuleReplacementPlugin(
+            new RegExp(`^${mod}$`),
+            path.resolve(__dirname, 'empty-module.js')
+          )
+        );
+        config.plugins.push(
+          new webpack.NormalModuleReplacementPlugin(
+            new RegExp(`^node:${mod}$`),
+            path.resolve(__dirname, 'empty-module.js')
+          )
+        );
+      });
     }
     
     return config;

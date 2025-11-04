@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 -ml-2">
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">🤖</span>
@@ -49,7 +49,7 @@ const Navbar = () => {
               <Link href="/list-agent" className="text-white hover:text-blue-400 transition-colors duration-200">
                 List Agent
               </Link>
-              <Link href="/docs" className="text-xs text-gray-400 hover:text-yellow-400 transition-colors duration-200">
+              <Link href="/docs" className="text-[10px] text-gray-500 hover:text-yellow-400 transition-colors duration-200">
                 Docs
               </Link>
              
@@ -57,7 +57,7 @@ const Navbar = () => {
           </div>
 
           {/* Wallet Connect Button */}
-          <div className="hidden md:block">
+          <div className="hidden md:block mr-2">
             <ConnectButton />
           </div>
 
@@ -133,7 +133,7 @@ const Navbar = () => {
               </Link>
               <Link 
                 href="/docs" 
-                className="text-xs text-gray-400 hover:text-yellow-400 block px-3 py-2 transition-colors duration-200"
+                className="text-[10px] text-gray-500 hover:text-yellow-400 block px-3 py-2 transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Docs

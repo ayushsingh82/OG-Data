@@ -1,11 +1,21 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import StorageClient from '../components/storage';
-import InferenceClient from '../components/interferance';
-import FineTuningClient from '../components/finetuning';
+
+// Dynamically import components that use 0g-serving-broker with SSR disabled
+const InferenceClient = dynamic(() => import('../components/interferance'), {
+  ssr: false,
+  loading: () => <div className="text-center py-8 text-gray-400">Loading inference client...</div>
+});
+
+const FineTuningClient = dynamic(() => import('../components/finetuning'), {
+  ssr: false,
+  loading: () => <div className="text-center py-8 text-gray-400">Loading fine-tuning client...</div>
+});
 
 export default function StorageInferencePage() {
   const [activeTab, setActiveTab] = useState('storage');
