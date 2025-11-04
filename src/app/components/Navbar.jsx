@@ -46,6 +46,9 @@ const Navbar = () => {
               <Link href="/list-agent" className="text-white hover:text-blue-400 transition-colors duration-200">
                 List Agent
               </Link>
+              <Link href="/docs" className="text-white hover:text-yellow-400 transition-colors duration-200">
+                Docs
+              </Link>
              
             </div>
           </div>
@@ -117,6 +120,13 @@ const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 List Agent
+              </Link>
+              <Link 
+                href="/docs" 
+                className="text-white hover:text-yellow-400 block px-3 py-2 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Docs
               </Link>
               <div className="pt-4">
                 <ConnectButton />
