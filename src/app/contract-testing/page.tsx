@@ -158,7 +158,7 @@ export default function ContractTesting() {
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">🔧 Contract Testing Interface</h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Test and interact with all Wave 5 smart contracts directly from the UI
+              Test and interact with all platform smart contracts directly from the UI
             </p>
           </div>
 
@@ -221,7 +221,7 @@ export default function ContractTesting() {
                 <div className="bg-black/50 rounded-lg p-6 text-center">
                   <div className="text-3xl mb-2">✅</div>
                   <div className="font-semibold text-green-400">Integration Complete</div>
-                  <div className="text-sm text-gray-300">Wave5IntegrationHub active</div>
+                  <div className="text-sm text-gray-300">Integration Hub active</div>
                 </div>
                 <div className="bg-black/50 rounded-lg p-6 text-center">
                   <div className="text-3xl mb-2">✅</div>

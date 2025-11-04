@@ -113,47 +113,112 @@ export default function InferenceClient() {
   };
 
   return (
-    <div className="p-4 bg-black text-white rounded-lg">
-      <button onClick={connect} className="bg-blue-600 px-4 py-2 rounded">Connect Wallet</button>
-      {broker && (
-        <>
-          <div className="mt-2">Balance: {balance} OG</div>
-          <button onClick={fund} className="bg-green-600 px-4 py-2 rounded mt-2">Fund 0.1 OG</button>
-          <button onClick={discover} className="bg-purple-600 px-4 py-2 rounded mt-2">Discover Services</button>
-        </>
-      )}
+    <div className="space-y-6">
+      {/* Connection Section */}
+      <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+        <h3 className="text-xl font-bold mb-4">Connect to 0G Inference Network</h3>
+        <div className="space-y-4">
+          {!broker ? (
+            <button 
+              onClick={connect} 
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200"
+            >
+              Connect Wallet
+            </button>
+          ) : (
+            <div className="space-y-3">
+              <div className="bg-black/50 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-gray-300">Available Balance:</span>
+                  <span className="text-blue-400 font-semibold">{balance} OG</span>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <button 
+                  onClick={fund} 
+                  className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+                >
+                  Fund 0.1 OG
+                </button>
+                <button 
+                  onClick={discover} 
+                  className="flex-1 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+                >
+                  Discover Services
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Services List */}
       {services.length > 0 && (
-        <div className="mt-4">
-          <h3>Available Services:</h3>
-          <ul>
+        <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+          <h3 className="text-xl font-bold mb-4">Available AI Services</h3>
+          <div className="space-y-3">
             {services.map((service) => (
-              <li key={service.provider} className="mb-2">
-                <div>
-                  <b>{service.model}</b> ({service.provider})<br />
-                  {service.description || ''}<br />
+              <div key={service.provider} className="bg-black/50 rounded-lg p-4 border border-gray-700 hover:border-blue-500/50 transition-colors duration-200">
+                <div className="flex justify-between items-start mb-2">
+                  <div>
+                    <div className="font-semibold text-white">{service.model}</div>
+                    <div className="text-sm text-gray-400">{service.provider}</div>
+                    {service.description && (
+                      <div className="text-sm text-gray-300 mt-1">{service.description}</div>
+                    )}
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xs text-gray-400">Verifiability</div>
+                    <div className="text-sm text-green-400">{service.verifiability}</div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between mt-3">
+                  <div className="text-sm text-gray-400">
+                    Input: {ethers.formatEther(service.inputPrice)} OG • Output: {ethers.formatEther(service.outputPrice)} OG
+                  </div>
                   <button
                     onClick={() => ask(service)}
-                    className="bg-blue-500 px-2 py-1 rounded mt-1"
+                    disabled={loading || !question}
+                    className={`px-4 py-2 rounded-lg transition-colors duration-200 ${
+                      loading || !question
+                        ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                        : 'bg-blue-600 hover:bg-blue-700 text-white'
+                    }`}
                   >
-                    Ask
+                    {loading ? 'Processing...' : 'Ask Question'}
                   </button>
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
-      <div className="mt-4">
-        <input
-          type="text"
-          value={question}
-          onChange={e => setQuestion(e.target.value)}
-          placeholder="Ask a question..."
-          className="text-black px-2 py-1 rounded"
-        />
+
+      {/* Question Input */}
+      <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
+        <h3 className="text-xl font-bold mb-4">Ask Your Question</h3>
+        <div className="space-y-4">
+          <input
+            type="text"
+            value={question}
+            onChange={e => setQuestion(e.target.value)}
+            placeholder="Enter your question for the AI agent..."
+            className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none"
+          />
+          {loading && (
+            <div className="flex items-center gap-2 text-blue-400">
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-400"></div>
+              <span>Processing your request...</span>
+            </div>
+          )}
+          {answer && (
+            <div className="bg-black/50 rounded-lg p-4 border border-green-500/30">
+              <div className="text-sm text-green-400 mb-2 font-semibold">AI Response:</div>
+              <div className="text-gray-300 whitespace-pre-wrap">{answer}</div>
+            </div>
+          )}
+        </div>
       </div>
-      {loading && <div>Loading...</div>}
-      {answer && <div className="mt-4 bg-gray-800 p-2 rounded">Answer: {answer}</div>}
     </div>
   );
 }

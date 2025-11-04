@@ -28,16 +28,13 @@ export default function Home() {
                 Leverage 0G Storage SDK and AI Inference capabilities for intelligent automation.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/platform" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center gap-2">
+                <Link href="/platform" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center justify-center gap-2">
                   <span>🚀</span>
                   Explore Platform
                 </Link>
-                <Link href="/storage" className="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center gap-2">
+                <Link href="/storage" className="border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center justify-center gap-2">
                   <span>💾</span>
                   Storage & Inference
-                </Link>
-                <Link href="/contract-testing" className="border border-green-500 text-green-400 hover:bg-green-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
-                  Test Contracts
                 </Link>
               </div>
             </div>

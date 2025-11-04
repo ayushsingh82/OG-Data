@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import StorageClient from '../components/storage';
 import InferenceClient from '../components/interferance';
+import FineTuningClient from '../components/finetuning';
 
 export default function StorageInferencePage() {
   const [activeTab, setActiveTab] = useState('storage');
@@ -54,6 +55,17 @@ export default function StorageInferencePage() {
               >
                 <span className="mr-2">🧠</span>
                 AI Inference
+              </button>
+              <button
+                onClick={() => setActiveTab('finetuning')}
+                className={`px-6 py-3 rounded-lg transition-colors duration-200 ${
+                  activeTab === 'finetuning'
+                    ? 'bg-cyan-600 text-white'
+                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                }`}
+              >
+                <span className="mr-2">🎯</span>
+                Fine-Tuning
               </button>
             </div>
           </div>
@@ -215,13 +227,91 @@ export default function StorageInferencePage() {
                 </div>
               </div>
             )}
+
+            {activeTab === 'finetuning' && (
+              <div className="space-y-8">
+                {/* Fine-Tuning Section Header */}
+                <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-xl p-8">
+                  <h2 className="text-3xl font-bold mb-4">Model Fine-Tuning SDK</h2>
+                  <p className="text-gray-300 text-lg mb-6">
+                    Fine-tune AI models on the 0G Compute Network with verifiable training and secure model delivery
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="bg-black/50 rounded-lg p-6">
+                      <div className="text-2xl font-bold text-purple-400 mb-2">Secure Training</div>
+                      <div className="text-gray-300 text-sm">Verifiable training with encrypted model delivery</div>
+                    </div>
+                    <div className="bg-black/50 rounded-lg p-6">
+                      <div className="text-2xl font-bold text-purple-400 mb-2">Provider Network</div>
+                      <div className="text-gray-300 text-sm">Access to multiple fine-tuning providers</div>
+                    </div>
+                    <div className="bg-black/50 rounded-lg p-6">
+                      <div className="text-2xl font-bold text-purple-400 mb-2">Cost Optimized</div>
+                      <div className="text-gray-300 text-sm">Pay only for successful training tasks</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Fine-Tuning Client Component */}
+                <div className="bg-black/50 border border-gray-800 rounded-xl p-8">
+                  <FineTuningClient />
+                </div>
+
+                {/* Fine-Tuning Features */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="bg-black/50 border border-gray-800 rounded-xl p-6">
+                    <h3 className="text-xl font-bold mb-4">Task Management</h3>
+                    <ul className="space-y-3 text-gray-300">
+                      <li className="flex items-start">
+                        <span className="text-purple-400 mr-3">✓</span>
+                        <span>Create fine-tuning tasks with custom datasets</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-purple-400 mr-3">✓</span>
+                        <span>Monitor task progress in real-time</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-purple-400 mr-3">✓</span>
+                        <span>View detailed training logs</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-purple-400 mr-3">✓</span>
+                        <span>Track task status and completion</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-black/50 border border-gray-800 rounded-xl p-6">
+                    <h3 className="text-xl font-bold mb-4">Model Delivery</h3>
+                    <ul className="space-y-3 text-gray-300">
+                      <li className="flex items-start">
+                        <span className="text-purple-400 mr-3">✓</span>
+                        <span>Secure encrypted model delivery</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-purple-400 mr-3">✓</span>
+                        <span>Download fine-tuned models</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-purple-400 mr-3">✓</span>
+                        <span>Decrypt models with your private key</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-purple-400 mr-3">✓</span>
+                        <span>Integration with 0G Storage</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Integration Info */}
           <div className="mt-16">
             <div className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border border-cyan-500/30 rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-6 text-center">0G Network Integration</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                   <h4 className="text-lg font-semibold mb-4 text-cyan-400">Storage Integration</h4>
                   <ul className="space-y-2 text-gray-300 text-sm">
@@ -240,6 +330,15 @@ export default function StorageInferencePage() {
                     <li>• Proof of Execution (PoE) support</li>
                   </ul>
                 </div>
+                <div>
+                  <h4 className="text-lg font-semibold mb-4 text-purple-400">Fine-Tuning Integration</h4>
+                  <ul className="space-y-2 text-gray-300 text-sm">
+                    <li>• Fine-tune models on 0G Compute Network</li>
+                    <li>• Secure encrypted model delivery</li>
+                    <li>• Provider network for training</li>
+                    <li>• Verifiable training process</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -250,3 +349,4 @@ export default function StorageInferencePage() {
     </div>
   );
 }
+

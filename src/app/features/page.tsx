@@ -5,15 +5,15 @@ import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-export default function Wave5Features() {
+export default function PlatformFeatures() {
   const [activeFeature, setActiveFeature] = useState('overview');
 
   const features = [
     {
       id: 'overview',
       name: 'Overview',
-      icon: '🔮',
-      title: 'Wave 5 Complete Implementation',
+      icon: '🚀',
+      title: 'Complete Platform Implementation',
       description: 'Fully decentralized, self-sustaining economy with advanced AI capabilities',
       details: [
         '9 Smart Contracts deployed and integrated',
@@ -209,7 +209,7 @@ export default function Wave5Features() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl sm:text-6xl font-bold mb-6">
-              🔮 <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Wave 5 Features</span>
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Platform Features</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Fully decentralized, self-sustaining economy with advanced AI capabilities, privacy features, and enterprise-grade compliance
@@ -267,7 +267,7 @@ export default function Wave5Features() {
                   <h3 className="text-xl font-bold mb-4">Quick Actions</h3>
                   <div className="space-y-3">
                     <Link 
-                      href="/wave5" 
+                      href="/platform" 
                       className="block w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg transition-colors duration-200 text-center"
                     >
                       Open Dashboard
